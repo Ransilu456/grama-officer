@@ -1,0 +1,73 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Document Shadow / Base -->
+  <path
+      android:pathData="M37,20H77C80.3,20 83,22.7 83,26V88C83,91.3 80.3,94 77,94H37C33.7,94 31,91.3 31,88V26C31,22.7 33.7,20 37,20Z"
+      android:fillColor="#B2EBF2"/>
+  <!-- Document Body -->
+  <path
+      android:pathData="M35,18H75C78.3,18 81,20.7 81,24V86C81,89.3 78.3,92 75,92H35C31.7,92 29,89.3 29,86V24C29,20.7 31.7,18 35,18Z"
+      android:fillColor="#E0F7FA"/>
+  <!-- Document Lines -->
+  <path
+      android:pathData="M38,34H58V37H38Z"
+      android:fillColor="#4DD0E1"/>
+  <path
+      android:pathData="M38,44H72V47H38Z"
+      android:fillColor="#4DD0E1"/>
+  <path
+      android:pathData="M38,54H68V57H38Z"
+      android:fillColor="#4DD0E1"/>
+  <path
+      android:pathData="M38,64H50V67H38Z"
+      android:fillColor="#4DD0E1"/>
+  <path
+      android:pathData="M38,74H62V77H38Z"
+      android:fillColor="#4DD0E1"/>
+  <!-- Top Document Dots -->
+  <path
+      android:pathData="M65,26A2,2 0 1,1 65,25.9Z"
+      android:fillColor="#00BCD4"/>
+  <path
+      android:pathData="M71,26A2,2 0 1,1 71,25.9Z"
+      android:fillColor="#00BCD4"/>
+  <!-- Sparkles -->
+  <path
+      android:pathData="M23,30L25,23L27,30L34,32L27,34L25,41L23,34L16,32Z"
+      android:fillColor="#80DEEA"/>
+  <path
+      android:pathData="M88,24L89.5,19L91,24L96,25.5L91,27L89.5,32L88,27L83,25.5Z"
+      android:fillColor="#26C6DA"/>
+  <!-- Magnifying Glass Handle -->
+  <path
+      android:pathData="M84,84L98,98"
+      android:strokeWidth="10"
+      android:strokeLineCap="round"
+      android:strokeColor="#00BCD4"/>
+  <!-- Magnifying Glass Outer Rim -->
+  <path
+      android:pathData="M70,70A24,24 0 1,1 70,69.9Z"
+      android:fillColor="#E0F7FA"/>
+  <path
+      android:pathData="M70,70A24,24 0 1,1 70,69.9Z"
+      android:strokeWidth="6"
+      android:strokeColor="#26C6DA"/>
+  <!-- Red Cross Circle -->
+  <path
+      android:pathData="M70,70A16,16 0 1,1 70,69.9Z"
+      android:fillColor="#FF5252"/>
+  <!-- White Cross Lines -->
+  <path
+      android:pathData="M64,64L76,76"
+      android:strokeWidth="3.5"
+      android:strokeLineCap="round"
+      android:strokeColor="#FFFFFF"/>
+  <path
+      android:pathData="M76,64L64,76"
+      android:strokeWidth="3.5"
+      android:strokeLineCap="round"
+      android:strokeColor="#FFFFFF"/>
+</vector>

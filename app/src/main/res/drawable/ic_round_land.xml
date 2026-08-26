@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Circular Background (Pastel Mint/Green) -->
+    <path
+        android:fillColor="#E0F2F1"
+        android:pathData="M24,0C10.75,0 0,10.75 0,24C0,37.25 10.75,48 24,48C37.25,48 48,37.25 48,24C48,10.75 37.25,0 24,0Z"/>
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#004D40"
+        android:strokeWidth="1.4"
+        android:pathData="M33,16A4,4 0 1,1 33,8A4,4 0 1,1 33,16Z"/>
+    <!-- Mountain / Hills -->
+    <path
+        android:fillColor="#80CBC4"
+        android:strokeColor="#004D40"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,36L18,22L26,30L33,19L41,36H8Z"/>
+    <!-- Tree Trunk & Foliage -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M16,30H19V36H16V30Z"/>
+    <path
+        android:fillColor="#4DB6AC"
+        android:strokeColor="#004D40"
+        android:strokeWidth="1.6"
+        android:pathData="M17.5,31A4,4 0 1,1 17.5,23A4,4 0 1,1 17.5,31Z"/>
+</vector>

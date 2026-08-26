@@ -1,0 +1,56 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Smooth Rounded Body / Shoulders -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M11,37C11,30.5 15.5,27.5 22,27.5C28.5,27.5 33,30.5 33,37C33,39 31.5,40 29.5,40H14.5C12.5,40 11,39 11,37Z"/>
+    <!-- Rounded Collar -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M18,28L22,33L26,28"/>
+    <!-- Rounded Neck -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M19,23H25V28H19V23Z"/>
+    <!-- Rounded Head -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M15,15C15,11.13 18.13,8 22,8C25.87,8 29,11.13 29,15C29,18.87 25.87,22 22,22C18.13,22 15,18.87 15,15Z"/>
+    <!-- Rounded Hair (Pink/Coral) -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M15,14C15,10.5 18,7.5 22,7.5C26,7.5 29,10.5 29,14C28,12.5 25.5,12 23.5,12C20.5,12 18,13.5 15,14Z"/>
+    <!-- Rounded Eyes -->
+    <path
+        android:fillColor="#283593"
+        android:pathData="M18.5,16A1,1 0 1,1 18.5,14A1,1 0 1,1 18.5,16ZM25.5,16A1,1 0 1,1 25.5,14A1,1 0 1,1 25.5,16Z"/>
+    <!-- Rounded Smile -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M20,18.5Q22,20.5 24,18.5"/>
+</vector>

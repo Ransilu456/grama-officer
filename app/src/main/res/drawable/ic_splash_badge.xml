@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+  <!-- Outer Shield Glow / Shadow -->
+  <path
+      android:pathData="M48,6L18,18V44C18,63.5 30.8,81.4 48,88C65.2,81.4 78,63.5 78,44V18L48,6Z"
+      android:fillColor="#15001970"/>
+  <!-- Main Shield Body with Gradient -->
+  <path
+      android:pathData="M48,8L20,20V44C20,62.2 32,78.8 48,85C64,78.8 76,62.2 76,44V20L48,8Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="20"
+          android:startY="8"
+          android:endX="76"
+          android:endY="85"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#FF00E5FF"/>
+        <item android:offset="0.5" android:color="#FF1B24A6"/>
+        <item android:offset="1.0" android:color="#FF10187A"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <!-- Inner Shield Inset -->
+  <path
+      android:pathData="M48,14L25,24V44C25,59.5 35,73.5 48,79C61,73.5 71,59.5 71,44V24L48,14Z"
+      android:fillColor="#0DFFFFFF"/>
+  <!-- Central Emblem / Lion / Star / Check -->
+  <path
+      android:pathData="M48,26L52.5,35.2L62.6,36.7L55.3,43.8L57,53.8L48,49.1L39,53.8L40.7,43.8L33.4,36.7L43.5,35.2L48,26Z"
+      android:fillColor="#FFFFFFFF"/>
+  <!-- Lower Ribbon / Pillar Motif -->
+  <path
+      android:pathData="M38,60H58V63H38Z"
+      android:fillColor="#CCFFFFFF"/>
+  <path
+      android:pathData="M42,65H54V67H42Z"
+      android:fillColor="#99FFFFFF"/>
+</vector>

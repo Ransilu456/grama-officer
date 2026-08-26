@@ -1,0 +1,79 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Sparks & Dots -->
+  <path
+      android:pathData="M22,34L24,28L26,34L32,36L26,38L24,44L22,38L16,36Z"
+      android:fillColor="#80DEEA"/>
+  <path
+      android:pathData="M102,48L103.5,43L105,48L110,49.5L105,51L103.5,56L102,51L97,49.5Z"
+      android:fillColor="#B388FF"/>
+  <!-- Top Socket Body with Purple Gradient -->
+  <path
+      android:pathData="M52,30H78C82.4,30 86,33.6 86,38V54C86,58.4 82.4,62 78,62H52C47.6,62 44,58.4 44,54V38C44,33.6 47.6,30 52,30Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="44"
+          android:startY="30"
+          android:endX="86"
+          android:endY="62"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#7C4DFF"/>
+        <item android:offset="1.0" android:color="#536DFE"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <!-- Top Socket Holes -->
+  <path
+      android:pathData="M58,46A3,3 0 1,1 58,45.9Z"
+      android:fillColor="#311B92"/>
+  <path
+      android:pathData="M72,46A3,3 0 1,1 72,45.9Z"
+      android:fillColor="#311B92"/>
+  <!-- Cyan Exclamation Bubble -->
+  <path
+      android:pathData="M88,38A10,10 0 1,1 88,37.9Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="78"
+          android:startY="28"
+          android:endX="98"
+          android:endY="48"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#80DEEA"/>
+        <item android:offset="1.0" android:color="#00BCD4"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M87,32H89V39H87Z"
+      android:fillColor="#FFFFFF"/>
+  <path
+      android:pathData="M87,41H89V43H87Z"
+      android:fillColor="#FFFFFF"/>
+  <!-- Bottom Plug Body with Purple Gradient -->
+  <path
+      android:pathData="M58,68H84C88.4,68 92,71.6 92,76V92C92,96.4 88.4,100 84,100H58C53.6,100 50,96.4 50,92V76C50,71.6 53.6,68 58,68Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="50"
+          android:startY="68"
+          android:endX="92"
+          android:endY="100"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#B388FF"/>
+        <item android:offset="1.0" android:color="#7C4DFF"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <!-- Plug Prongs -->
+  <path
+      android:pathData="M40,78H50V81H40Z"
+      android:fillColor="#EDE7F6"/>
+  <path
+      android:pathData="M40,87H50V90H40Z"
+      android:fillColor="#EDE7F6"/>
+</vector>

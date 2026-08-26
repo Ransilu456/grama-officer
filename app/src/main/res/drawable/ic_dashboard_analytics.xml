@@ -1,0 +1,72 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Monitor / Card Frame -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M11,15H53C54.6,15 56,16.4 56,18V47C56,48.6 54.6,50 53,50H11C9.4,50 8,48.6 8,47V18C8,16.4 9.4,15 11,15Z"/>
+    <!-- Window Top Header Bar -->
+    <path
+        android:fillColor="#F3E5F5"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M8,18C8,16.4 9.4,15 11,15H53C54.6,15 56,16.4 56,18V23H8V18Z"/>
+    <!-- Window Header 3 Dots -->
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M13,19A1.2,1.2 0 1,1 13,18.9ZM17,19A1.2,1.2 0 1,1 17,18.9ZM21,19A1.2,1.2 0 1,1 21,18.9Z"/>
+    <!-- Blue Area Chart under graph -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M9,49V42L18,44L27,33L38,42L49,30L55,34V49H9Z"/>
+    <!-- Yellow Area in corner -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M38,49L38,42L49,30L55,34V49H38Z"/>
+    <!-- Navy outline of background mountain -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,42L18,44L27,33L38,42L49,30L55,34"/>
+    <!-- Pink / Magenta Line Graph on top -->
+    <path
+        android:strokeColor="#EC407A"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M10,43L20,38L30,31L42,39L53,26"/>
+    <!-- Line Graph Circular Nodes (Pink/Coral with dark center) -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M10,45A2.5,2.5 0 1,1 10,40A2.5,2.5 0 1,1 10,45Z"/>
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M20,40.5A2.5,2.5 0 1,1 20,35.5A2.5,2.5 0 1,1 20,40.5Z"/>
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M30,33.5A2.5,2.5 0 1,1 30,28.5A2.5,2.5 0 1,1 30,33.5Z"/>
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M42,41.5A2.5,2.5 0 1,1 42,36.5A2.5,2.5 0 1,1 42,41.5Z"/>
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M53,28.5A2.5,2.5 0 1,1 53,23.5A2.5,2.5 0 1,1 53,28.5Z"/>
+</vector>

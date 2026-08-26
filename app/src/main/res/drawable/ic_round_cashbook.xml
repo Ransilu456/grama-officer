@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Monitor / Chart Screen Frame -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,11H36C37.5,11 39,12.5 39,14V34C39,35.5 37.5,37 36,37H8C6.5,37 5,35.5 5,34V14C5,12.5 6.5,11 8,11Z"/>
+    <!-- Monitor Top Bar -->
+    <path
+        android:fillColor="#F3E5F5"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M5,14C5,12.5 6.5,11 8,11H36C37.5,11 39,12.5 39,14V17H5V14Z"/>
+    <!-- 3 Window Header Dots -->
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M9,14A1,1 0 1,1 9,13.9ZM12.5,14A1,1 0 1,1 12.5,13.9ZM16,14A1,1 0 1,1 16,13.9Z"/>
+    <!-- Blue Mountain Base -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M6,36V30L13,32L20,24L28,30L36,21L38,24V36H6Z"/>
+    <!-- Yellow Area in Corner -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M28,36L28,30L36,21L38,24V36H28Z"/>
+    <!-- Pink Line Graph with Rounded Nodes -->
+    <path
+        android:strokeColor="#EC407A"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7,31L14,27L21,21L29,27L37,18"/>
+    <!-- Nodes -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.4"
+        android:pathData="M7,32A1.8,1.8 0 1,1 7,28.4A1.8,1.8 0 1,1 7,32ZM21,22A1.8,1.8 0 1,1 21,18.4A1.8,1.8 0 1,1 21,22ZM37,19A1.8,1.8 0 1,1 37,15.4A1.8,1.8 0 1,1 37,19Z"/>
+</vector>

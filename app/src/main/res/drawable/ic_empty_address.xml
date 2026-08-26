@@ -1,0 +1,85 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Soft Sparkles -->
+  <path
+      android:pathData="M24,42L25.5,37L27,42L32,43.5L27,45L25.5,50L24,45L19,43.5Z"
+      android:fillColor="#B39DDB"/>
+  <path
+      android:pathData="M98,54L99.5,49L101,54L106,55.5L101,57L99.5,62L98,57L93,55.5Z"
+      android:fillColor="#80DEEA"/>
+  <!-- Cute Avatar Bubble Left -->
+  <path
+      android:pathData="M30,68A10,10 0 1,1 30,67.9Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="20"
+          android:startY="58"
+          android:endX="40"
+          android:endY="78"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#EDE7F6"/>
+        <item android:offset="1.0" android:color="#D1C4E9"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M26,67A1,1 0 1,1 26,66.9Z"
+      android:fillColor="#7E57C2"/>
+  <path
+      android:pathData="M34,67A1,1 0 1,1 34,66.9Z"
+      android:fillColor="#7E57C2"/>
+  <path
+      android:pathData="M28,71C29.3,72.3 30.7,72.3 32,71"
+      android:strokeWidth="1.2"
+      android:strokeLineCap="round"
+      android:strokeColor="#7E57C2"/>
+  <!-- House Roof & Base with Purple/Blue Gradient -->
+  <path
+      android:pathData="M38,62L60,42L82,62V88C82,90.2 80.2,92 78,92H42C39.8,92 38,90.2 38,88V62Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="38"
+          android:startY="42"
+          android:endX="82"
+          android:endY="92"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#B39DDB"/>
+        <item android:offset="0.5" android:color="#7E57C2"/>
+        <item android:offset="1.0" android:color="#5E35B1"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <!-- House Windows & Door -->
+  <path
+      android:pathData="M46,64H54V72H46Z"
+      android:fillColor="#D1C4E9"/>
+  <path
+      android:pathData="M66,64H74V72H66Z"
+      android:fillColor="#D1C4E9"/>
+  <path
+      android:pathData="M56,76H64V92H56Z"
+      android:fillColor="#4527A0"/>
+  <!-- Large Cyan Location Pin Over House -->
+  <path
+      android:pathData="M78,22C68.6,22 61,29.6 61,39C61,51.8 78,70 78,70C78,70 95,51.8 95,39C95,29.6 87.4,22 78,22Z">
+    <aapt:attr name="android:fillColor">
+      <gradient
+          android:startX="61"
+          android:startY="22"
+          android:endX="95"
+          android:endY="70"
+          android:type="linear">
+        <item android:offset="0.0" android:color="#80DEEA"/>
+        <item android:offset="0.5" android:color="#26C6DA"/>
+        <item android:offset="1.0" android:color="#00ACC1"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M78,39A6,6 0 1,1 78,38.9Z"
+      android:fillColor="#FFFFFF"/>
+</vector>

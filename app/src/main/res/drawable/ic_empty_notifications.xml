@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Sunbeam Glow -->
+  <path
+      android:pathData="M60,16V30"
+      android:strokeWidth="2"
+      android:strokeColor="#FFCDD2"/>
+  <!-- Sparkles -->
+  <path
+      android:pathData="M26,38L27.5,33L29,38L34,39.5L29,41L27.5,46L26,41L21,39.5Z"
+      android:fillColor="#FFAB91"/>
+  <path
+      android:pathData="M94,40L95.5,35L97,40L102,41.5L97,43L95.5,48L94,43L89,41.5Z"
+      android:fillColor="#FFAB91"/>
+  <path
+      android:pathData="M32,76L33,72L34,76L38,77L34,78L33,82L32,78L28,77Z"
+      android:fillColor="#FFCDD2"/>
+  <!-- Bell Clapper -->
+  <path
+      android:pathData="M52,78H68C68,82.4 64.4,86 60,86C55.6,86 52,82.4 52,78Z"
+      android:fillColor="#D32F2F"/>
+  <!-- Bell Body Base Layer -->
+  <path
+      android:pathData="M60,26C50.6,26 43,33.6 43,43V60L36,70C34.8,71.7 36,74 38,74H82C84,74 85.2,71.7 84,70L77,60V43C77,33.6 69.4,26 60,26Z"
+      android:fillColor="#FF8A80"/>
+  <!-- Bell Highlight Layer -->
+  <path
+      android:pathData="M60,26C55,26 50,30 48,36C52,38 58,40 64,40C72,40 78,36 82,34C79,29 70,26 60,26Z"
+      android:fillColor="#FFCDD2"/>
+  <!-- Cobweb Lines -->
+  <path
+      android:pathData="M43,62C40,68 38,74 38,74"
+      android:strokeWidth="1.5"
+      android:strokeColor="#FFEBEE"/>
+  <path
+      android:pathData="M77,62C80,68 82,74 82,74"
+      android:strokeWidth="1.5"
+      android:strokeColor="#FFEBEE"/>
+</vector>

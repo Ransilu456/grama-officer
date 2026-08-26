@@ -1,0 +1,71 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Ground line -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M8,51H56"/>
+    <!-- Cargo Box / Dump Bed -->
+    <path
+        android:fillColor="#F8BBD0"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,22H36L34,39H14L9,22Z"/>
+    <!-- Cargo Bed details -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M9,22L7,24H35"/>
+    <path
+        android:strokeColor="#EC407A"
+        android:strokeWidth="1.6"
+        android:pathData="M14,28H33M16,34H32"/>
+    <!-- Truck Cab -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M35,26H46C47.5,26 49,27.5 50.5,30L55,38C55.7,39.3 56,40.5 56,42V45H35V26Z"/>
+    <!-- Cab Window -->
+    <path
+        android:fillColor="#81D4FA"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M40,29H45L49,36H40V29Z"/>
+    <!-- Front Bumper / Headlight -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M54,41H57V44H54V41Z"/>
+    <!-- Left Wheel Outer -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:pathData="M18,46A5.5,5.5 0 1,1 18,35A5.5,5.5 0 1,1 18,46Z"/>
+    <!-- Left Wheel Center -->
+    <path
+        android:fillColor="#283593"
+        android:pathData="M18,42A2,2 0 1,1 18,38A2,2 0 1,1 18,42Z"/>
+    <!-- Right Wheel Outer -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:pathData="M46,46A5.5,5.5 0 1,1 46,35A5.5,5.5 0 1,1 46,46Z"/>
+    <!-- Right Wheel Center -->
+    <path
+        android:fillColor="#283593"
+        android:pathData="M46,42A2,2 0 1,1 46,38A2,2 0 1,1 46,42Z"/>
+</vector>

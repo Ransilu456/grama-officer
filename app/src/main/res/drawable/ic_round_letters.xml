@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Smooth Rounded Paper / Certificate -->
+    <path
+        android:fillColor="#F3E5F5"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M10,9H31C33.2,9 35,10.8 35,13V35C35,36.5 33.5,38 31,38H10C8.5,38 7,36.5 7,35V12C7,10.5 8.5,9 10,9Z"/>
+    <!-- Top Right Yellow Scroll Curl -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M30,9C30,6 32.5,4.5 35,4.5C37.5,4.5 39,6 39,8.5C39,11 37.5,12.5 35,12.5H30V9Z"/>
+    <!-- 3 Rounded Header Dots -->
+    <path
+        android:fillColor="#283593"
+        android:pathData="M13,14A1.2,1.2 0 1,1 13,13.9ZM18,14A1.2,1.2 0 1,1 18,13.9ZM23,14A1.2,1.2 0 1,1 23,13.9Z"/>
+    <!-- Pink / Coral Content Lines -->
+    <path
+        android:strokeColor="#FF8A80"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M12,19H30M12,24H26M12,29H20"/>
+    <!-- Cyan Rounded Wax Seal Stamp -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M27,33A4.5,4.5 0 1,1 27,24A4.5,4.5 0 1,1 27,33Z"/>
+</vector>

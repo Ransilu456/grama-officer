@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Floating Papers -->
+  <path
+      android:pathData="M24,36L44,28L54,52L34,60Z"
+      android:fillColor="#E1F5FE"/>
+  <path
+      android:pathData="M70,30L92,38L82,62L60,54Z"
+      android:fillColor="#E1F5FE"/>
+  <path
+      android:pathData="M73,37L89,43"
+      android:strokeWidth="2"
+      android:strokeColor="#81D4FA"/>
+  <path
+      android:pathData="M70,44L86,50"
+      android:strokeWidth="2"
+      android:strokeColor="#81D4FA"/>
+  <!-- Sparkles -->
+  <path
+      android:pathData="M18,50L19.5,45L21,50L26,51.5L21,53L19.5,58L18,53L13,51.5Z"
+      android:fillColor="#81D4FA"/>
+  <path
+      android:pathData="M98,64L99.5,59L101,64L106,65.5L101,67L99.5,72L98,67L93,65.5Z"
+      android:fillColor="#4FC3F7"/>
+  <path
+      android:pathData="M32,22L33,18L34,22L38,23L34,24L33,28L32,24L28,23Z"
+      android:fillColor="#81D4FA"/>
+  <!-- Envelope Back Flap -->
+  <path
+      android:pathData="M28,46H92V84C92,88.4 88.4,92 84,92H36C31.6,92 28,88.4 28,84V46Z"
+      android:fillColor="#90CAF9"/>
+  <!-- Envelope Side & Bottom Folds -->
+  <path
+      android:pathData="M28,46L60,70L92,46V84C92,88.4 88.4,92 84,92H36C31.6,92 28,88.4 28,84V46Z"
+      android:fillColor="#42A5F5"/>
+  <!-- Question Mark Red Circle Badge -->
+  <path
+      android:pathData="M78,32A14,14 0 1,1 78,31.9Z"
+      android:fillColor="#FF5252"/>
+  <!-- Question Mark Glyph -->
+  <path
+      android:pathData="M75,26C75,24.3 76.3,23 78,23C79.7,23 81,24.3 81,26C81,27.5 79.8,28.4 78.8,29.1C78.1,29.6 77.5,30.3 77.5,31.2V32H79.5V31.4C79.5,30.7 80,30.2 80.6,29.7C81.8,28.8 83,27.6 83,26C83,23.2 80.8,21 78,21C75.2,21 73,23.2 73,26H75ZM77.5,34H79.5V36H77.5V34Z"
+      android:fillColor="#FFFFFF"/>
+</vector>

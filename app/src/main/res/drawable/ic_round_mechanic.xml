@@ -1,0 +1,55 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Worker Body / Blue Shirt -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,38C9,32.5 13,29.5 19,29.5C25,29.5 29,32.5 29,38C29,39.5 27.5,40.5 26,40.5H12C10.5,40.5 9,39.5 9,38Z"/>
+    <!-- Overalls Straps -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M13,30V40M25,30V40"/>
+    <!-- Neck -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.4"
+        android:pathData="M16,25H22V30H16V25Z"/>
+    <!-- Head / Face -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M14,19C14,15.5 16.5,13 19,13C21.5,13 24,15.5 24,19C24,22.5 21.5,25 19,25C16.5,25 14,22.5 14,19Z"/>
+    <!-- Hardhat (Pink/Coral) -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,17C12,11.5 15,8 19,8C23,8 26,11.5 26,17H12Z"/>
+    <!-- Helmet Brim (Yellow) -->
+    <path
+        android:fillColor="#FFD54F"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:pathData="M10,17H28V19H10V17Z"/>
+    <!-- Golden Wrench in Hand -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M31,23C30,23 29.2,23.6 29,24.5L31.5,25.5L30.5,28.5L28,27.5C28.2,28.5 29,29.5 30,30V38C30,39 30.8,39.5 31.5,39.5C32.2,39.5 33,39 33,38V30C34,29.5 34.8,28.5 34.8,27.5L32.5,26L33.5,23.5L31.8,24C31.5,23.3 31.2,23 31,23Z"/>
+</vector>

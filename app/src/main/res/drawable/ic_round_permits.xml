@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Ground Line -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M5,35H39"/>
+    <!-- Rounded Dump Bed / Cargo -->
+    <path
+        android:fillColor="#F8BBD0"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6,16H25L23,27H10L6,16Z"/>
+    <!-- Truck Cab with Rounded Contours -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M24,19H32C33.5,19 34.8,20 35.8,22L39,27C39.6,28 40,29 40,30V31H24V19Z"/>
+    <!-- Cab Window -->
+    <path
+        android:fillColor="#81D4FA"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M27,21H31L34,26H27V21Z"/>
+    <!-- Rounded Wheels -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M13,32A4,4 0 1,1 13,24A4,4 0 1,1 13,32Z"/>
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M33,32A4,4 0 1,1 33,24A4,4 0 1,1 33,32Z"/>
+</vector>

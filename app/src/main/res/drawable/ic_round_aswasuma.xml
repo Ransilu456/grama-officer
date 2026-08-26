@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Circular Background (Pastel Pink/Red) -->
+    <path
+        android:fillColor="#FFEBEE"
+        android:pathData="M24,0C10.75,0 0,10.75 0,24C0,37.25 10.75,48 24,48C37.25,48 48,37.25 48,24C48,10.75 37.25,0 24,0Z"/>
+    <!-- Heart in Center -->
+    <path
+        android:fillColor="#EF5350"
+        android:strokeColor="#B71C1C"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M24,19C21,-2 6,6 18,22L24,28L30,22C42,6 27,-2 24,19Z"/>
+    <!-- Helping Hands Cradle -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#B71C1C"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,32C9,30 11,28 14,28L21,30C23,30.5 24,31 25,32L29,32C31,32 33,30.5 35,29L39,28C41,28 42,29.5 41,31.5L37,38C34,42 28,42 24,40L15,40L10,36C9.3,35 9,33.5 9,32Z"/>
+</vector>

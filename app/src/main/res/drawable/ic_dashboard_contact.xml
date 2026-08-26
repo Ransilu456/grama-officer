@@ -1,0 +1,43 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Envelope Body (Yellow) -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,20H48C49.6,20 51,21.4 51,23V47C51,48.6 49.6,50 48,50H8C6.4,50 5,48.6 5,47V23C5,21.4 6.4,20 8,20Z"/>
+    <!-- Envelope Bottom/Side Creases -->
+    <path
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M5,47L22,33M43,36L51,47"/>
+    <!-- Envelope Top Flap (Cyan / Sky Blue) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M5,22L28,37L51,22"/>
+    <!-- Circular Phone Badge Background (Pink / Lavender) -->
+    <path
+        android:fillColor="#F8BBD0"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:pathData="M48,57A11,11 0 1,1 48,35A11,11 0 1,1 48,57Z"/>
+    <!-- Phone Badge Inner Glow -->
+    <path
+        android:fillColor="#FFCDD2"
+        android:pathData="M48,54A8,8 0 1,1 48,38A8,8 0 1,1 48,54Z"/>
+    <!-- Phone Receiver Icon (Pink/Coral) -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M44.5,41C43.7,41 43,41.7 43,42.5C43,47.7 47.3,52 52.5,52C53.3,52 54,51.3 54,50.5V48.5C54,47.9 53.6,47.5 53.1,47.3L50.5,46.5C50,46.3 49.4,46.5 49.1,46.9L48.2,47.8C46.5,46.9 45.1,45.5 44.2,43.8L45.1,42.9C45.5,42.6 45.7,42 45.5,41.5L44.7,38.9C44.5,38.4 44.1,38 43.5,38H41.5C40.7,38 40,38.7 40,39.5C40,40.3 40.5,41 41.5,41H44.5Z"/>
+</vector>

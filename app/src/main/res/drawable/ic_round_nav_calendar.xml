@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Rounded Calendar Outline -->
+    <path
+        android:strokeColor="#8E9AA8"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7,5H17C19.2,5 21,6.8 21,9V18C21,20.2 19.2,22 17,22H7C4.8,22 3,20.2 3,18V9C3,6.8 4.8,5 7,5Z"/>
+    <!-- Top Binder Tabs -->
+    <path
+        android:strokeColor="#8E9AA8"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M7,2.5V5.5M17,2.5V5.5"/>
+    <!-- Header Line -->
+    <path
+        android:strokeColor="#8E9AA8"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M3,9.5H21"/>
+    <!-- Rounded Dots Grid -->
+    <path
+        android:fillColor="#8E9AA8"
+        android:pathData="M7.5,13A1,1 0 1,1 7.5,12A1,1 0 1,1 7.5,13ZM12,13A1,1 0 1,1 12,12A1,1 0 1,1 12,13ZM16.5,13A1,1 0 1,1 16.5,12A1,1 0 1,1 16.5,13ZM7.5,17.5A1,1 0 1,1 7.5,16.5A1,1 0 1,1 7.5,17.5ZM12,17.5A1,1 0 1,1 12,16.5A1,1 0 1,1 12,17.5ZM16.5,17.5A1,1 0 1,1 16.5,16.5A1,1 0 1,1 16.5,17.5Z"/>
+</vector>

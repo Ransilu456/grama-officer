@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Rounded Speech Bubble Outline -->
+    <path
+        android:strokeColor="#8E9AA8"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7,4H17C19.76,4 22,6.24 22,9V14C22,16.76 19.76,19 17,19H7.5L4.4,21.5C3.7,22.06 2.7,21.56 2.7,20.67V17C2.26,16.12 2,15.11 2,14V9C2,6.24 4.24,4 7,4Z"/>
+</vector>

@@ -1,0 +1,28 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Circular Background (Pastel Neutral Lavender) -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M24,0C10.75,0 0,10.75 0,24C0,37.25 10.75,48 24,48C37.25,48 48,37.25 48,24C48,10.75 37.25,0 24,0Z"/>
+    <!-- Memorial Certificate Scroll -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#37474F"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M14,13H34C35.5,13 37,14.5 37,16V34C37,35.5 35.5,37 34,37H14C12.5,37 11,35.5 11,34V16C11,14.5 12.5,13 14,13Z"/>
+    <!-- Memorial Candle / Ribbon -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#37474F"
+        android:strokeWidth="1.6"
+        android:pathData="M22,25H26V33H22V25Z"/>
+    <!-- Flame -->
+    <path
+        android:fillColor="#FF7043"
+        android:pathData="M24,18C23,20 22,22 24,24C26,22 25,20 24,18Z"/>
+</vector>

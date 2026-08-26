@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <!-- Folder Back Flap -->
+  <path
+      android:pathData="M32,38H56L64,46H88C91.3,46 94,48.7 94,52V86C94,89.3 91.3,92 88,92H32C28.7,92 26,89.3 26,86V44C26,40.7 28.7,38 32,38Z"
+      android:fillColor="#90CAF9"/>
+  <!-- Floating Sheets inside Folder -->
+  <path
+      android:pathData="M38,26H70V58H38Z"
+      android:fillColor="#E3F2FD"/>
+  <path
+      android:pathData="M44,34H64V37H44Z"
+      android:fillColor="#90CAF9"/>
+  <path
+      android:pathData="M44,42H60V45H44Z"
+      android:fillColor="#90CAF9"/>
+  <!-- Front Folder Plate -->
+  <path
+      android:pathData="M26,56H94V86C94,89.3 91.3,92 88,92H32C28.7,92 26,89.3 26,86V56Z"
+      android:fillColor="#2196F3"/>
+  <!-- Lock / Center Inset on Folder -->
+  <path
+      android:pathData="M54,64H66V76H54Z"
+      android:fillColor="#1565C0"/>
+  <!-- Red Question Mark Badge -->
+  <path
+      android:pathData="M38,24A12,12 0 1,1 38,23.9Z"
+      android:fillColor="#FF5252"/>
+  <!-- Question Mark Character -->
+  <path
+      android:pathData="M36,19C36,17.9 36.9,17 38,17C39.1,17 40,17.9 40,19C40,20 39.2,20.6 38.6,21C38.1,21.4 37.7,21.9 37.7,22.5V23H38.7V22.6C38.7,22.1 39.1,21.8 39.5,21.5C40.3,20.9 41,20.1 41,19C41,17.3 39.7,16 38,16C36.3,16 35,17.3 35,19H36ZM37.5,24.5H38.5V25.5H37.5V24.5Z"
+      android:fillColor="#FFFFFF"/>
+</vector>

@@ -1,0 +1,68 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Speech Bubble -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:strokeColor="#5C6BC0"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M38,10H54C55.65,10 57,11.35 57,13V23C57,24.65 55.65,26 54,26H43L37,31V26C35.9,26 35,25.1 35,24V13C35,11.35 36.35,10 38,10Z"/>
+    <!-- Speech Bubble 3 Dots -->
+    <path
+        android:fillColor="#7986CB"
+        android:pathData="M41,18A1.5,1.5 0 1,1 41,17.9ZM46,18A1.5,1.5 0 1,1 46,17.9ZM51,18A1.5,1.5 0 1,1 51,17.9Z"/>
+    <!-- Person Shirt Body -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M16,54C16,45 22,41 32,41C42,41 48,45 48,54V56H16V54Z"/>
+    <!-- Collar -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M27,41L32,47L37,41Z"/>
+    <!-- Shirt buttons -->
+    <path
+        android:fillColor="#283593"
+        android:pathData="M32,50A1,1 0 1,1 32,49.9ZM32,54A1,1 0 1,1 32,53.9Z"/>
+    <!-- Neck -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M28,34H36V41H28V34Z"/>
+    <!-- Head / Face -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M23,24C23,19 27,15 32,15C37,15 41,19 41,24C41,29.5 37,34 32,34C27,34 23,29.5 23,24Z"/>
+    <!-- Ears -->
+    <path
+        android:fillColor="#FFE082"
+        android:strokeColor="#283593"
+        android:strokeWidth="1.8"
+        android:pathData="M21,24C21,22.9 21.9,22 23,22V26C21.9,26 21,25.1 21,24ZM43,24C43,25.1 42.1,26 41,26V22C42.1,22 43,22.9 43,24Z"/>
+    <!-- Hair (Pink / Coral style like reference) -->
+    <path
+        android:fillColor="#FF8A80"
+        android:strokeColor="#283593"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M23,22C23,17 27,14 32,14C37,14 41,17 41,21C39,18 36,18 34,18C30,18 27,21 23,22Z"/>
+</vector>
