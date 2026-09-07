@@ -69,8 +69,8 @@ fun ProfileScreen(
         officerAccount = authRepository.getOfficerAccount()
         personCount = repository.getAll("person").size
         letterCount = repository.getAll("letters").size
-        permitCount = repository.getAll("permits").size
-        aswasumaCount = repository.getAll("aswasuma").size
+        permitCount = repository.getAll("permit_recommendations").size
+        aswasumaCount = repository.getAll("cashbook").size
     }
 
     Box(
@@ -266,14 +266,14 @@ fun ProfileScreen(
                             count = permitCount.toString(),
                             iconRes = R.drawable.ic_round_permits,
                             modifier = Modifier.weight(1f),
-                            onClick = { onNavigateToModule("permits") }
+                            onClick = { onNavigateToModule("permit_recommendations") }
                         )
                         ProfileMiniStat(
-                            title = "Aswasuma",
+                            title = "Cash Book",
                             count = aswasumaCount.toString(),
-                            iconRes = R.drawable.ic_round_aswasuma,
+                            iconRes = R.drawable.ic_round_cashbook,
                             modifier = Modifier.weight(1f),
-                            onClick = { onNavigateToModule("aswasuma") }
+                            onClick = { onNavigateToModule("cashbook") }
                         )
                     }
 

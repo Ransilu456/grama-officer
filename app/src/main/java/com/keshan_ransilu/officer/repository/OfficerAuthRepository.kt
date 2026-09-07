@@ -44,22 +44,27 @@ class OfficerAuthRepository(private val context: Context) {
         email: String,
         phone: String,
         password: String
-    ): OfficerAccount = withContext(Dispatchers.IO) {
-        val hash = hashPassword(password)
-        val account = OfficerAccount(
-            fullName = fullName.trim(),
-            officerId = officerId.trim(),
-            division = division.trim(),
-            email = email.trim(),
-            phone = phone.trim(),
-            passwordHash = hash,
-            createdAt = System.currentTimeMillis(),
-            lastLoginAt = System.currentTimeMillis()
-        )
-        val text = json.encodeToString(account)
-        accountFile.writeText(text)
-        setLoggedIn(true)
-        account
+    ): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val hash = hashPassword(password)
+            val account = OfficerAccount(
+                fullName = fullName.trim(),
+                officerId = officerId.trim(),
+                division = division.trim(),
+                email = email.trim(),
+                phone = phone.trim(),
+                passwordHash = hash,
+                createdAt = System.currentTimeMillis(),
+                lastLoginAt = System.currentTimeMillis()
+            )
+            val text = json.encodeToString(account)
+            accountFile.writeText(text)
+            setLoggedIn(true)
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
     }
 
     suspend fun updateOfficerAccount(

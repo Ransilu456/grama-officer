@@ -3,7 +3,6 @@ package com.keshan_ransilu.officer.ui.auth
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -13,8 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,37 +28,24 @@ fun SplashScreen(
     onNavigateNext: () -> Unit
 ) {
     val currentYear = remember { Calendar.getInstance().get(Calendar.YEAR) }
-    val transitionState = remember { MutableTransitionState(false) }
+    var startAnimation by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        transitionState.targetState = true
-        delay(1600)
+        startAnimation = true
+        delay(1400)
         onNavigateNext()
     }
 
-    val transition = rememberTransition(transitionState, label = "splashTransition")
-    val alphaAnim by transition.animateFloat(
-        transitionSpec = { tween(durationMillis = 800, easing = FastOutSlowInEasing) },
-        label = "alpha"
-    ) { state -> if (state) 1f else 0f }
-
-    val scaleAnim by transition.animateFloat(
-        transitionSpec = { spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow) },
-        label = "scale"
-    ) { state -> if (state) 1f else 0.82f }
+    val alphaAnim by animateFloatAsState(
+        targetValue = if (startAnimation) 1f else 0f,
+        animationSpec = tween(durationMillis = 700, easing = FastOutSlowInEasing),
+        label = "splashAlpha"
+    )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFEEF4FF),
-                        Color.White,
-                        Color(0xFFF0F4FF)
-                    )
-                )
-            )
+            .background(Color.White)
     ) {
         Column(
             modifier = Modifier
@@ -72,20 +56,16 @@ fun SplashScreen(
         ) {
             Spacer(modifier = Modifier.height(40.dp))
 
-            // Center Minimalist Emblem & Official Branding
+            // Center Clean Emblem & Title
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .scale(scaleAnim)
-                    .alpha(alphaAnim)
+                modifier = Modifier.alpha(alphaAnim)
             ) {
-                // Official Emblem Card with soft blue accent border
                 Box(
                     modifier = Modifier
-                        .size(112.dp)
+                        .size(100.dp)
                         .clip(CircleShape)
-                        .background(Color.White)
-                        .border(2.5.dp, Color(0xFFD4E2FF), CircleShape)
+                        .background(Color(0xFFF4F7FC))
                         .padding(18.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -96,40 +76,48 @@ fun SplashScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(26.dp))
+                Spacer(modifier = Modifier.height(22.dp))
 
                 Text(
                     text = "Officer Portal",
-                    fontSize = 28.sp,
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary,
                     letterSpacing = 0.5.sp,
                     textAlign = TextAlign.Center
                 )
 
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = "ග්‍රාම නිලධාරී පරිපාලන පද්ධතිය",
+                    fontSize = 13.sp,
+                    color = TextSecondary,
+                    textAlign = TextAlign.Center
+                )
             }
 
-            // Bottom Progress & Real-time Watermark
+            // Bottom Minimalist Progress & Watermark
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 12.dp)
                     .alpha(alphaAnim)
             ) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(22.dp),
                     color = HeaderBluePrimary,
-                    strokeWidth = 2.5.dp
+                    strokeWidth = 2.2.dp
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
                     text = "© $currentYear Developed By E Marketing Paradice",
-                    fontSize = 10.sp,
-                    color = TextSecondary.copy(alpha = 0.65f)
+                    fontSize = 11.sp,
+                    color = TextSecondary.copy(alpha = 0.6f)
                 )
             }
         }

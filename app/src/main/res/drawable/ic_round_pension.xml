@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Pension / Elder Security Badge Rounded Icon -->
+    <path
+        android:fillColor="#E8F4FD"
+        android:strokeColor="#1E88E5"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M22,5 C13.7,5 7,11.7 7,20 C7,29.5 22,39 22,39 C22,39 37,29.5 37,20 C37,11.7 30.3,5 22,5 Z" />
+    <path
+        android:strokeColor="#1E88E5"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M16,21 C16,17.7 18.7,15 22,15 C25.3,15 28,17.7 28,21 C28,24.5 22,29 22,29 C22,29 16,24.5 16,21 Z" />
+    <path
+        android:fillColor="#1E88E5"
+        android:pathData="M22,21.5m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+</vector>

@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Development Projects / Construction Crane / Building Icon -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:strokeColor="#F57C00"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,38 L36,38" />
+    <path
+        android:fillColor="#FFF8E1"
+        android:strokeColor="#F57C00"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M11,38 L11,18 L24,18 L24,38 Z" />
+    <path
+        android:fillColor="#FFE0B2"
+        android:strokeColor="#F57C00"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M24,38 L24,10 L33,10 L33,38 Z" />
+    <path
+        android:strokeColor="#F57C00"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M15,23 L15,25 M15,30 L15,32 M28,15 L28,17 M28,22 L28,24 M28,29 L28,31" />
+</vector>

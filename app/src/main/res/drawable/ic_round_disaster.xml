@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Disaster Relief / Emergency Lifebuoy / Shield Icon -->
+    <path
+        android:fillColor="#FFEBEE"
+        android:strokeColor="#D32F2F"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M22,5 C12.6,5 5,12.6 5,22 C5,31.4 12.6,39 22,39 C31.4,39 39,31.4 39,22 C39,12.6 31.4,5 22,5 Z" />
+    <path
+        android:strokeColor="#D32F2F"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M22,14 C17.6,14 14,17.6 14,22 C14,26.4 17.6,30 22,30 C26.4,30 30,26.4 30,22 C30,17.6 26.4,14 22,14 Z" />
+    <path
+        android:strokeColor="#D32F2F"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M16.3,16.3 L10,10 M27.7,16.3 L34,10 M16.3,27.7 L10,34 M27.7,27.7 L34,34" />
+</vector>

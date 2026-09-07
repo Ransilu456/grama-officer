@@ -2,7 +2,6 @@ package com.keshan_ransilu.officer.ui.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -17,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,15 +38,7 @@ fun WelcomeStartScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFF2F6FF),
-                        Color.White,
-                        Color(0xFFEEF4FF)
-                    )
-                )
-            )
+            .background(Color.White)
     ) {
         Column(
             modifier = Modifier
@@ -65,14 +55,13 @@ fun WelcomeStartScreen(
             ) {
                 Spacer(modifier = Modifier.height(36.dp))
 
-                // Official Circular Shield Emblem
+                // Officer Illustration / Shield
                 Box(
                     modifier = Modifier
-                        .size(96.dp)
+                        .size(100.dp)
                         .clip(CircleShape)
-                        .background(Color.White)
-                        .border(2.5.dp, Color(0xFFD6E2FB), CircleShape)
-                        .padding(16.dp),
+                        .background(Color(0xFFF4F7FC))
+                        .padding(18.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
@@ -86,7 +75,7 @@ fun WelcomeStartScreen(
 
                 Text(
                     text = "Grama Niladhari",
-                    fontSize = 28.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary,
                     textAlign = TextAlign.Center
@@ -102,14 +91,14 @@ fun WelcomeStartScreen(
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Digitalized registry management, citizen records, certificates & public administration portal.",
+                    text = "Official administrative registry, certificates & citizen records portal.",
                     fontSize = 13.sp,
                     color = TextSecondary,
                     textAlign = TextAlign.Center,
-                    lineHeight = 20.sp,
+                    lineHeight = 18.sp,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
 
@@ -120,8 +109,8 @@ fun WelcomeStartScreen(
                     onClick = if (hasAccount) onLoginClick else onGetStartedClick,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(52.dp),
-                    shape = RoundedCornerShape(26.dp),
+                        .height(50.dp),
+                    shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary)
                 ) {
                     Text(
@@ -146,11 +135,17 @@ fun WelcomeStartScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
-                        shape = RoundedCornerShape(25.dp),
+                        shape = RoundedCornerShape(14.dp),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = HeaderBluePrimary)
                     ) {
+                        Icon(
+                            imageVector = Icons.Default.Lock,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Existing Officer Login",
+                            text = "Existing Account Login",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -158,32 +153,18 @@ fun WelcomeStartScreen(
                 }
             }
 
-            // Minimal Privacy Watermark Footer
+            // Simple Bottom Footer
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 20.dp, top = 28.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .navigationBarsPadding()
+                    .padding(vertical = 18.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = null,
-                        tint = TextSecondary,
-                        modifier = Modifier.size(13.dp)
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = "100% Offline & Secure Local Division Vault",
-                        fontSize = 11.sp,
-                        color = TextSecondary
-                    )
-                }
-                Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "© $currentYear Government of Sri Lanka",
-                    fontSize = 10.sp,
-                    color = TextSecondary.copy(alpha = 0.65f)
+                    text = "© $currentYear Developed By E Marketing Paradice",
+                    fontSize = 11.sp,
+                    color = TextSecondary.copy(alpha = 0.6f)
                 )
             }
         }

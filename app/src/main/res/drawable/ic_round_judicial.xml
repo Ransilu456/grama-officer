@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Judicial Scale of Justice Rounded Icon -->
+    <path
+        android:strokeColor="#5E35B1"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M22,7 L22,37 M14,37 L30,37 M10,12 L34,12" />
+    <!-- Left Pan -->
+    <path
+        android:strokeColor="#5E35B1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M10,12 L6,22 L14,22 Z" />
+    <path
+        android:fillColor="#EDE7F6"
+        android:strokeColor="#5E35B1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M6,22 C6,25 9.5,25 10,25 C10.5,25 14,25 14,22 Z" />
+    <!-- Right Pan -->
+    <path
+        android:strokeColor="#5E35B1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M34,12 L30,22 L38,22 Z" />
+    <path
+        android:fillColor="#EDE7F6"
+        android:strokeColor="#5E35B1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M30,22 C30,25 33.5,25 34,25 C34.5,25 38,25 38,22 Z" />
+</vector>

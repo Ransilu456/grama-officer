@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Goods Voucher & Form Counterfoils Icon -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:strokeColor="#0288D1"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6,13 C6,11.3 7.3,10 9,10 L35,10 C36.7,10 38,11.3 38,13 L38,31 C38,32.7 36.7,34 35,34 L9,34 C7.3,34 6,32.7 6,31 Z" />
+    <!-- Perforated Counterfoil Line -->
+    <path
+        android:strokeColor="#0288D1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M16,10 L16,13 M16,17 L16,21 M16,25 L16,29 M16,31 L16,34" />
+    <path
+        android:strokeColor="#0288D1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M22,17 L32,17 M22,23 L30,23 M22,27 L27,27 M10,21 L12,21" />
+</vector>

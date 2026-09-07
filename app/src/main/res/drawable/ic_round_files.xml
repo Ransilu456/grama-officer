@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Subject Files Register Folder Icon -->
+    <path
+        android:fillColor="#FFF3E0"
+        android:strokeColor="#FB8C00"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6,14 C6,12.3 7.3,11 9,11 L17,11 L20,15 L35,15 C36.7,15 38,16.3 38,18 L38,33 C38,34.7 36.7,36 35,36 L9,36 C7.3,36 6,34.7 6,33 Z" />
+    <path
+        android:strokeColor="#FB8C00"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M14,23 L30,23 M14,28 L24,28" />
+</vector>

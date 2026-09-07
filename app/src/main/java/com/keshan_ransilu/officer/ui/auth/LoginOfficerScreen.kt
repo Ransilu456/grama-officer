@@ -2,9 +2,6 @@ package com.keshan_ransilu.officer.ui.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -14,13 +11,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.ripple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -67,15 +62,7 @@ fun LoginOfficerScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFF2F6FF),
-                        Color.White,
-                        Color(0xFFEEF4FF)
-                    )
-                )
-            )
+            .background(Color.White)
             .imePadding()
     ) {
         Column(
@@ -93,13 +80,11 @@ fun LoginOfficerScreen(
             ) {
                 Spacer(modifier = Modifier.height(36.dp))
 
-                // Official Circular Emblem with Subtle Ring
                 Box(
                     modifier = Modifier
-                        .size(88.dp)
+                        .size(80.dp)
                         .clip(CircleShape)
-                        .background(Color.White)
-                        .border(2.dp, Color(0xFFD6E2FB), CircleShape)
+                        .background(Color(0xFFF4F7FC))
                         .padding(14.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -110,11 +95,11 @@ fun LoginOfficerScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
                     text = "Officer Login",
-                    fontSize = 26.sp,
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary,
                     textAlign = TextAlign.Center
@@ -123,234 +108,190 @@ fun LoginOfficerScreen(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = "Grama Niladhari Administrative Portal",
+                    text = "ග්‍රාම නිලධාරී පරිපාලන පද්ධතිය",
                     fontSize = 13.sp,
                     color = TextSecondary,
                     textAlign = TextAlign.Center
                 )
 
-                if (savedAccount != null && savedAccount?.division?.isNotBlank() == true && savedAccount!!.division.length > 2) {
-                    Spacer(modifier = Modifier.height(10.dp))
+                if (savedAccount != null && savedAccount?.division?.isNotBlank() == true) {
+                    Spacer(modifier = Modifier.height(8.dp))
                     Surface(
-                        shape = RoundedCornerShape(10.dp),
+                        shape = RoundedCornerShape(8.dp),
                         color = HeaderBluePrimary.copy(alpha = 0.08f)
                     ) {
                         Text(
                             text = "Division: ${savedAccount!!.division}",
-                            fontSize = 11.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = HeaderBluePrimary,
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp)
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                         )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(28.dp))
 
-                // Login Form Container
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    elevation = CardDefaults.cardElevation(0.dp)
-                ) {
-                    Column(
+                // Error alert
+                if (errorMessage != null) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = Color(0xFFFFEBEE),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(22.dp)
+                            .padding(bottom = 16.dp)
                     ) {
-                        AuthTextField(
-                            value = identifier,
-                            onValueChange = { identifier = it; errorMessage = null },
-                            label = "Officer ID or Email",
-                            iconRes = R.drawable.ic_input_id
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        AuthTextField(
-                            value = password,
-                            onValueChange = { password = it; errorMessage = null },
-                            label = "Password / PIN",
-                            iconRes = R.drawable.ic_input_lock,
-                            isPassword = true
-                        )
-
-                        if (errorMessage != null) {
-                            Spacer(modifier = Modifier.height(14.dp))
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.error.copy(alpha = 0.10f),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.ErrorOutline,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.error,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                    Spacer(modifier = Modifier.width(8.dp))
-                                    Text(
-                                        text = errorMessage ?: "",
-                                        color = MaterialTheme.colorScheme.error,
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                }
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(24.dp))
-
-                        // Full-width Sleek Primary Action Button
-                        Button(
-                            onClick = {
-                                focusManager.clearFocus()
-                                if (identifier.isBlank() || password.isBlank()) {
-                                    errorMessage = "Please enter both ID and password"
-                                    return@Button
-                                }
-                                isSubmitting = true
-                                scope.launch {
-                                    val success = authRepository.login(identifier, password)
-                                    isSubmitting = false
-                                    if (success) {
-                                        onLoginSuccess()
-                                    } else {
-                                        errorMessage = "Invalid Officer ID or Password"
-                                    }
-                                }
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(52.dp),
-                            shape = RoundedCornerShape(26.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary),
-                            enabled = !isSubmitting
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (isSubmitting) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(22.dp),
-                                    color = Color.White,
-                                    strokeWidth = 2.5.dp
-                                )
-                            } else {
-                                Text("Login to Portal", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
-                            }
+                            Icon(
+                                imageVector = Icons.Default.Error,
+                                contentDescription = null,
+                                tint = Color(0xFFD32F2F),
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = errorMessage!!,
+                                color = Color(0xFFD32F2F),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Medium
+                            )
                         }
                     }
                 }
+
+                // Simple Input fields
+                OutlinedTextField(
+                    value = identifier,
+                    onValueChange = {
+                        identifier = it
+                        errorMessage = null
+                    },
+                    label = { Text("Officer ID / Email") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_input_id),
+                            contentDescription = null,
+                            tint = HeaderBluePrimary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp),
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    ),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = HeaderBluePrimary,
+                        unfocusedBorderColor = Color(0xFFD0D7E2)
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = {
+                        password = it
+                        errorMessage = null
+                    },
+                    label = { Text("Password") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_input_lock),
+                            contentDescription = null,
+                            tint = HeaderBluePrimary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    },
+                    visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp),
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = HeaderBluePrimary,
+                        unfocusedBorderColor = Color(0xFFD0D7E2)
+                    )
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Switch to Registration
-                Row(
+                Button(
+                    onClick = {
+                        focusManager.clearFocus()
+                        if (identifier.isBlank() || password.isBlank()) {
+                            errorMessage = "Please enter both identifier and password"
+                            return@Button
+                        }
+                        scope.launch {
+                            isSubmitting = true
+                            val success = authRepository.login(identifier.trim(), password.trim())
+                            isSubmitting = false
+                            if (success) {
+                                onLoginSuccess()
+                            } else {
+                                errorMessage = "Invalid credentials. Please try again."
+                            }
+                        }
+                    },
+                    enabled = !isSubmitting,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(10.dp))
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = ripple(bounded = true, color = HeaderBluePrimary.copy(alpha = 0.15f)),
-                            onClick = onNavigateToRegister
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary)
+                ) {
+                    if (isSubmitting) {
+                        CircularProgressIndicator(
+                            color = Color.White,
+                            strokeWidth = 2.dp,
+                            modifier = Modifier.size(20.dp)
                         )
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    } else {
+                        Text(
+                            text = "Login to Portal",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                TextButton(
+                    onClick = onNavigateToRegister
                 ) {
                     Text(
-                        text = "Need a new officer account? ",
-                        fontSize = 13.sp,
-                        color = TextSecondary
-                    )
-                    Text(
-                        text = "Register Here",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
+                        text = "Register New Officer Account",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
                         color = HeaderBluePrimary
                     )
                 }
             }
 
-            // Bottom Watermark
+            // Footer
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 20.dp, top = 20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .navigationBarsPadding()
+                    .padding(vertical = 18.dp)
             ) {
                 Text(
-                    text = "© $currentYear Government of Sri Lanka",
+                    text = "© $currentYear Developed By E Marketing Paradice",
                     fontSize = 11.sp,
-                    color = TextSecondary.copy(alpha = 0.65f)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun AuthTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    iconRes: Int,
-    isPassword: Boolean = false,
-    keyboardType: KeyboardType = KeyboardType.Text,
-    error: String? = null
-) {
-    val isError = !error.isNullOrBlank()
-
-    Column(modifier = Modifier.fillMaxWidth()) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = { Text(label, fontSize = 13.sp) },
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = iconRes),
-                    contentDescription = null,
-                    tint = HeaderBluePrimary,
-                    modifier = Modifier.size(20.dp)
-                )
-            },
-            visualTransformation = if (isPassword) PasswordVisualTransformation() else androidx.compose.ui.text.input.VisualTransformation.None,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = if (isPassword) KeyboardType.Password else keyboardType,
-                imeAction = ImeAction.Next
-            ),
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(16.dp),
-            isError = isError,
-            singleLine = true,
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = HeaderBluePrimary,
-                unfocusedBorderColor = Color(0xFFE2E8F0),
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                cursorColor = HeaderBluePrimary,
-                focusedLabelColor = HeaderBluePrimary,
-                unfocusedLabelColor = TextSecondary
-            )
-        )
-
-        if (isError) {
-            Row(
-                modifier = Modifier.padding(start = 10.dp, top = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Error,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.size(13.dp)
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = error ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    fontSize = 11.sp
+                    color = TextSecondary.copy(alpha = 0.6f)
                 )
             }
         }

@@ -13,7 +13,8 @@ import java.util.UUID
 
 class RegisterRepository(
     private val context: Context,
-    private val store: JsonStore = JsonStore(context)
+    private val store: JsonStore = JsonStore(context),
+    private val notificationRepo: NotificationRepository = NotificationRepository(context)
 ) {
 
     suspend fun getAll(moduleId: String): List<JsonObject> = withContext(Dispatchers.IO) {
@@ -30,12 +31,26 @@ class RegisterRepository(
         val jsonMap: MutableMap<String, JsonElement> = recordMap.mapValues { JsonPrimitive(it.value) }.toMutableMap()
         val now = System.currentTimeMillis().toString()
 
+        val module = RegisterCatalog.find { it.id == moduleId }
+        val moduleName = module?.titleSi ?: moduleId
+        val primaryName = recordMap.values.firstOrNull { it.isNotBlank() } ?: "Record"
+
         val recordId = if (existingId.isNullOrBlank()) {
             val id = UUID.randomUUID().toString()
             jsonMap["id"] = JsonPrimitive(id)
             jsonMap["createdAt"] = JsonPrimitive(now)
             jsonMap["updatedAt"] = JsonPrimitive(now)
             records.add(0, JsonObject(jsonMap))
+
+            // Trigger real notification for record addition
+            notificationRepo.addNotification(
+                title = "New Entry Added: $moduleName",
+                subtitle = "$primaryName successfully saved to registry.",
+                category = "Registers",
+                iconRes = module?.iconRes ?: com.keshan_ransilu.officer.R.drawable.ic_notification_bell,
+                targetModuleId = moduleId
+            )
+
             id
         } else {
             val index = records.indexOfFirst { it["id"]?.jsonPrimitive?.contentOrNull == existingId }
@@ -48,6 +63,16 @@ class RegisterRepository(
                 jsonMap["createdAt"] = JsonPrimitive(now)
                 records.add(0, JsonObject(jsonMap))
             }
+
+            // Trigger real notification for record update
+            notificationRepo.addNotification(
+                title = "Entry Updated: $moduleName",
+                subtitle = "Changes to $primaryName were saved.",
+                category = "Registers",
+                iconRes = module?.iconRes ?: com.keshan_ransilu.officer.R.drawable.ic_notification_bell,
+                targetModuleId = moduleId
+            )
+
             existingId
         }
 
@@ -58,9 +83,20 @@ class RegisterRepository(
     suspend fun delete(moduleId: String, id: String): Boolean = withContext(Dispatchers.IO) {
         val records = getAll(moduleId).toMutableList()
         val initialSize = records.size
+        val recordToDelete = records.find { it["id"]?.jsonPrimitive?.contentOrNull == id }
+        val recordTitle = recordToDelete?.values?.firstOrNull { it.jsonPrimitive.content.isNotBlank() }?.jsonPrimitive?.content ?: "Record"
+        
         records.removeAll { it["id"]?.jsonPrimitive?.contentOrNull == id }
         if (records.size != initialSize) {
             store.writeAll(moduleId, records)
+            val module = RegisterCatalog.find { it.id == moduleId }
+            notificationRepo.addNotification(
+                title = "Entry Deleted",
+                subtitle = "$recordTitle was removed from ${module?.titleSi ?: moduleId}.",
+                category = "Registers",
+                iconRes = module?.iconRes ?: com.keshan_ransilu.officer.R.drawable.ic_notification_bell,
+                targetModuleId = moduleId
+            )
             true
         } else {
             false
@@ -99,6 +135,7 @@ class RegisterRepository(
                 file.delete()
             }
         }
+        notificationRepo.clearAll()
     }
 
     suspend fun backupAllToJson(): String = withContext(Dispatchers.IO) {
