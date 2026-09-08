@@ -105,64 +105,6 @@ fun NavGraph(
                             .weight(1f)
                             .padding(horizontal = 14.dp, vertical = 8.dp)
                     ) {
-                        val isHome = currentRoute == "home"
-                        Surface(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = ripple(bounded = true, color = HeaderBluePrimary.copy(alpha = 0.15f)),
-                                    onClick = {
-                                        navController.navigate("home") {
-                                            popUpTo("home") { inclusive = true }
-                                        }
-                                        scope.launch { drawerState.close() }
-                                    }
-                                ),
-                            shape = RoundedCornerShape(12.dp),
-                            color = if (isHome) HeaderBluePrimary.copy(alpha = 0.08f) else Color.Transparent
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 14.dp, vertical = 12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(36.dp)
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .background(if (isHome) HeaderBluePrimary else ScreenBg),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Dashboard,
-                                        contentDescription = null,
-                                        tint = if (isHome) Color.White else HeaderBluePrimary,
-                                        modifier = Modifier.size(20.dp)
-                                    )
-                                }
-                                Spacer(Modifier.width(14.dp))
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(
-                                        "Dashboard",
-                                        color = if (isHome) HeaderBluePrimary else TextPrimary,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 14.sp
-                                    )
-                                    Text(
-                                        "ප්‍රධාන පුවරුව",
-                                        color = TextSecondary,
-                                        fontSize = 11.sp
-                                    )
-                                }
-                            }
-                        }
-
-                        Spacer(Modifier.height(8.dp))
-
                         Text(
                             "ALL REGISTERS & SERVICES",
                             color = TextSecondary,

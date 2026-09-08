@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <!-- Soft Organic Pastel Blob Background -->
+    <path
+        android:fillColor="#EDF2FE"
+        android:pathData="M100,25 C145,20 180,55 175,100 C170,148 140,178 95,175 C50,172 22,140 25,95 C28,50 55,30 100,25 Z" />
+    <path
+        android:fillColor="#E1EBFE"
+        android:pathData="M110,40 C148,38 168,68 165,105 C162,142 135,165 98,162 C61,159 38,132 40,95 C42,58 72,42 110,40 Z" />
+
+    <!-- 3D Hourglass / Folder Base -->
+    <path
+        android:fillColor="#C2D6FC"
+        android:strokeColor="#304FFE"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M70,60 L130,60 L112,96 C110,100 110,100 112,104 L130,140 L70,140 L88,104 C90,100 90,100 88,96 Z" />
+
+    <!-- Glass Highlights & Sand Flow -->
+    <path
+        android:fillColor="#304FFE"
+        android:pathData="M78,66 L122,66 L108,94 L92,94 Z" />
+    <path
+        android:fillColor="#304FFE"
+        android:pathData="M97,105 L103,105 L122,134 L78,134 Z" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M65,58 L135,58 M65,142 L135,142" />
+
+    <!-- Floating Badge Circle (Red Warning Badge) -->
+    <path
+        android:fillColor="#FF5252"
+        android:pathData="M152,65m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0" />
+    <!-- Exclamation mark inside badge -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M152,54 L152,67" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M152,75m-2.2,0a2.2,2.2 0,1 1,4.4 0a2.2,2.2 0,1 1,-4.4 0" />
+</vector>

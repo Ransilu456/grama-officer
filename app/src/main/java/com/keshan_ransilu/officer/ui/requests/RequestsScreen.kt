@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.repository.RegisterRepository
 import com.keshan_ransilu.officer.ui.components.EmptyStateCard
+import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.home.HeaderBackgroundFaceted
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.launch
@@ -247,31 +248,23 @@ fun RequestsScreen(
                         }
                     }
 
-                    // Requests List (Flat Cards, No Shadows, No Borders)
                     if (filteredRecords.isEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 80.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            if (searchQuery.isNotBlank()) {
-                                EmptyStateCard(
-                                    iconRes = R.drawable.ic_empty_result,
-                                    title = "Result not found",
-                                    description = "Please try again with another keywords or check the reference number",
-                                    actionText = "Clear Search",
-                                    onActionClick = { searchQuery = "" }
-                                )
-                            } else {
-                                EmptyStateCard(
-                                    iconRes = R.drawable.ic_empty_messages,
-                                    title = "No messages",
-                                    description = "When you have citizen requests or official letters, you'll see them here",
-                                    actionText = "New Request",
-                                    onActionClick = onAddRequestClick
-                                )
-                            }
+                        if (searchQuery.isNotBlank()) {
+                            com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                                title = "Result not found",
+                                subtitle = "Please try again with another keyword or check the reference number",
+                                iconRes = R.drawable.ic_state_search_empty,
+                                primaryActionText = "Clear Search",
+                                onPrimaryAction = { searchQuery = "" }
+                            )
+                        } else {
+                            com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                                title = "No requests yet",
+                                subtitle = "When you have citizen requests or official letters, you'll see them here",
+                                iconRes = R.drawable.ic_state_empty_box,
+                                primaryActionText = "New Request",
+                                onPrimaryAction = onAddRequestClick
+                            )
                         }
                     } else {
                         LazyColumn(

@@ -39,134 +39,123 @@ fun WelcomeStartScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .statusBarsPadding()
+            .navigationBarsPadding(),
+        contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding()
                 .verticalScroll(scrollState)
-                .padding(horizontal = 24.dp),
+                .padding(horizontal = 28.dp, vertical = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+            // Official Shield Emblem
+            Box(
+                modifier = Modifier
+                    .size(96.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFFF4F7FC))
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Spacer(modifier = Modifier.height(36.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_splash_badge),
+                    contentDescription = "Official Shield Emblem",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
-                // Officer Illustration / Shield
-                Box(
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFF4F7FC))
-                        .padding(18.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_splash_badge),
-                        contentDescription = "Official Shield Emblem",
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
+            Spacer(modifier = Modifier.height(24.dp))
 
-                Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "Grama Niladhari",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = TextPrimary,
+                textAlign = TextAlign.Center
+            )
 
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = "ප්‍රාදේශීය ලේකම් කාර්යාලයීය ද්වාරය",
+                fontSize = 14.sp,
+                color = HeaderBluePrimary,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "Official administrative registry, certificates & citizen records portal.",
+                fontSize = 13.sp,
+                color = TextSecondary,
+                textAlign = TextAlign.Center,
+                lineHeight = 19.sp,
+                modifier = Modifier.padding(horizontal = 12.dp)
+            )
+
+            Spacer(modifier = Modifier.height(36.dp))
+
+            // Action Buttons
+            Button(
+                onClick = if (hasAccount) onLoginClick else onGetStartedClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary)
+            ) {
                 Text(
-                    text = "Grama Niladhari",
-                    fontSize = 26.sp,
+                    text = if (hasAccount) "Login to Officer Portal" else "Setup Officer Account",
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
-                    color = TextPrimary,
-                    textAlign = TextAlign.Center
+                    color = Color.White
                 )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = "ප්‍රාදේශීය ලේකම් කාර්යාලයීය ද්වාරය",
-                    fontSize = 14.sp,
-                    color = HeaderBluePrimary,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center
+                Spacer(modifier = Modifier.width(8.dp))
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(16.dp)
                 )
+            }
 
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = "Official administrative registry, certificates & citizen records portal.",
-                    fontSize = 13.sp,
-                    color = TextSecondary,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 18.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-
-                Spacer(modifier = Modifier.height(36.dp))
-
-                // Action Buttons
-                Button(
-                    onClick = if (hasAccount) onLoginClick else onGetStartedClick,
+            if (!hasAccount) {
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedButton(
+                    onClick = onLoginClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
                     shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary)
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = HeaderBluePrimary)
                 ) {
-                    Text(
-                        text = if (hasAccount) "Login to Officer Portal" else "Setup Officer Account",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
                     Icon(
-                        imageVector = Icons.Default.ArrowForward,
+                        imageVector = Icons.Default.Lock,
                         contentDescription = null,
-                        tint = Color.White,
                         modifier = Modifier.size(16.dp)
                     )
-                }
-
-                if (!hasAccount) {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    OutlinedButton(
-                        onClick = onLoginClick,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp),
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = HeaderBluePrimary)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "Existing Account Login",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Existing Account Login",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
             }
 
-            // Simple Bottom Footer
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .padding(vertical = 18.dp)
-            ) {
-                Text(
-                    text = "© $currentYear Developed By E Marketing Paradice",
-                    fontSize = 11.sp,
-                    color = TextSecondary.copy(alpha = 0.6f)
-                )
-            }
+            Spacer(modifier = Modifier.height(36.dp))
+
+            Text(
+                text = "© $currentYear Developed By E Marketing Paradice",
+                fontSize = 11.sp,
+                color = TextSecondary.copy(alpha = 0.6f),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

@@ -38,6 +38,7 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.data.registry.RegisterCatalog
 import com.keshan_ransilu.officer.data.registry.RegisterModule
 import com.keshan_ransilu.officer.repository.RegisterRepository
+import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonObject
@@ -525,28 +526,21 @@ fun EmptyListPlaceholder(
     onAddClick: () -> Unit,
     onClearQuery: () -> Unit = {}
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 100.dp, start = 16.dp, end = 16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        if (query.isNotBlank()) {
-            com.keshan_ransilu.officer.ui.components.EmptyStateCard(
-                iconRes = R.drawable.ic_empty_result,
-                title = "Result not found",
-                description = "Please try again with another keywords or maybe use generic term",
-                actionText = "Search again",
-                onActionClick = onClearQuery
-            )
-        } else {
-            com.keshan_ransilu.officer.ui.components.EmptyStateCard(
-                iconRes = R.drawable.ic_empty_records,
-                title = "No records yet",
-                description = "There are no records in this register yet. Tap below to create your first entry.",
-                actionText = "Add Record",
-                onActionClick = onAddClick
-            )
-        }
+    if (query.isNotBlank()) {
+        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+            title = "Result not found",
+            subtitle = "Please try again with another keyword or use generic terms",
+            iconRes = R.drawable.ic_state_search_empty,
+            primaryActionText = "Search again",
+            onPrimaryAction = onClearQuery
+        )
+    } else {
+        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+            title = "No records yet",
+            subtitle = "There are no records in this official register. Tap below to create your first entry.",
+            iconRes = R.drawable.ic_state_empty_box,
+            primaryActionText = "Add New Record",
+            onPrimaryAction = onAddClick
+        )
     }
 }

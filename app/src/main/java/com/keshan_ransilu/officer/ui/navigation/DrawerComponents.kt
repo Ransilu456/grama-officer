@@ -2,6 +2,7 @@ package com.keshan_ransilu.officer.ui.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -9,13 +10,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.ripple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -29,8 +30,7 @@ import com.keshan_ransilu.officer.ui.theme.*
 import java.util.Calendar
 
 /**
- * Modern minimal drawer header showing the logged-in officer's name, ID and division.
- * Clean, elegant typography with NO light blue text.
+ * Premium redesigned Drawer Header showcasing Officer credentials, Division, and verified status.
  */
 @Composable
 fun DrawerProfileHeader(
@@ -48,74 +48,81 @@ fun DrawerProfileHeader(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        HeaderBlueDark,
-                        HeaderBluePrimary
-                    )
-                )
-            )
+            .background(Color.White)
             .statusBarsPadding()
-            .padding(bottom = 18.dp)
+            .padding(horizontal = 18.dp, vertical = 14.dp)
     ) {
-        // Top Action Row
+        // Top Action Bar with Close Button
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = Color.White.copy(alpha = 0.2f)
-            ) {
-                Text(
-                    text = "GN DIVISION PORTAL",
-                    color = Color.White,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 0.8.sp,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = HeaderBluePrimary.copy(alpha = 0.08f)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Verified,
+                            contentDescription = null,
+                            tint = HeaderBluePrimary,
+                            modifier = Modifier.size(13.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "OFFICIAL GN PORTAL",
+                            color = HeaderBluePrimary,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp
+                        )
+                    }
+                }
             }
 
             Surface(
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(34.dp)
                     .clip(CircleShape)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = ripple(bounded = true, color = Color.White),
+                        indication = ripple(bounded = true, color = HeaderBluePrimary.copy(alpha = 0.15f)),
                         onClick = onClose
                     ),
                 shape = CircleShape,
-                color = Color.White.copy(alpha = 0.18f)
+                color = Color(0xFFF2F5FA)
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close drawer",
-                        tint = Color.White,
-                        modifier = Modifier.size(18.dp)
+                        tint = TextPrimary,
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }
         }
 
-        // Profile card with clean flat frosted styling
+        Spacer(modifier = Modifier.height(14.dp))
+
+        // Redesigned Officer Identity Card (Clickable to Profile)
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(18.dp))
+                .border(1.dp, Color(0xFFE5EBF5), RoundedCornerShape(18.dp))
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
-                    indication = ripple(bounded = true, color = Color.White),
+                    indication = ripple(bounded = true, color = HeaderBluePrimary.copy(alpha = 0.1f)),
                     onClick = onProfileClick
                 ),
             shape = RoundedCornerShape(18.dp),
-            color = Color.White.copy(alpha = 0.15f)
+            color = Color(0xFFF8FAFD)
         ) {
             Row(
                 modifier = Modifier
@@ -123,12 +130,13 @@ fun DrawerProfileHeader(
                     .padding(14.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Avatar Badge with clean white ring
+                // Officer Avatar Badge with crisp border
                 Box(
                     modifier = Modifier
                         .size(52.dp)
                         .clip(CircleShape)
                         .background(Color.White)
+                        .border(1.5.dp, HeaderBluePrimary.copy(alpha = 0.25f), CircleShape)
                         .padding(2.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -141,37 +149,42 @@ fun DrawerProfileHeader(
                     )
                 }
 
-                Spacer(modifier = Modifier.width(14.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = officerAccount?.fullName?.ifBlank { "Officer" } ?: "Grama Niladhari",
-                        color = Color.White,
+                        text = officerAccount?.fullName?.ifBlank { "Grama Niladhari" } ?: "Grama Niladhari",
+                        color = TextPrimary,
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
                         maxLines = 1
                     )
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = officerAccount?.officerId ?: "GN/WP/GM/0142",
-                        color = Color.White.copy(alpha = 0.9f),
+                        color = HeaderBluePrimary,
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.SemiBold,
                         maxLines = 1
                     )
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = officerAccount?.division ?: "142 - Mahara Central",
-                        color = Color.White.copy(alpha = 0.7f),
+                        color = TextSecondary,
                         fontSize = 11.sp,
                         maxLines = 1
                     )
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(10.dp))
+        HorizontalDivider(color = Color(0xFFEDF1F7), thickness = 1.dp)
     }
 }
 
 /**
- * Modern footer shown at the bottom of the navigation drawer with dynamic real-time year watermark.
+ * Modern footer shown at the bottom of the navigation drawer.
  */
 @Composable
 fun DrawerFooter() {
@@ -186,7 +199,7 @@ fun DrawerFooter() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalDivider(
-            color = Color(0xFFE8ECF4),
+            color = Color(0xFFEDF1F7),
             thickness = 1.dp,
             modifier = Modifier.padding(bottom = 10.dp)
         )

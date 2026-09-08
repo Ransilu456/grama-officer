@@ -29,6 +29,7 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.repository.NotificationModel
 import com.keshan_ransilu.officer.repository.NotificationRepository
 import com.keshan_ransilu.officer.ui.components.EmptyStateCard
+import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.home.HeaderBackgroundFaceted
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.launch
@@ -229,20 +230,13 @@ fun NotificationsScreen(
                             )
                         }
                     } else if (filteredNotifications.isEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 80.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            EmptyStateCard(
-                                iconRes = R.drawable.ic_empty_notifications,
-                                title = "No Notifications",
-                                description = "Whenever records or certificates are registered or updated, official alerts will appear here.",
-                                actionText = "Refresh",
-                                onActionClick = { loadData() }
-                            )
-                        }
+                        IllustratedStateScreen(
+                            title = "No Notifications",
+                            subtitle = "Whenever records or certificates are registered or updated, official alerts will appear here.",
+                            iconRes = R.drawable.ic_state_empty_box,
+                            primaryActionText = "Refresh",
+                            onPrimaryAction = { loadData() }
+                        )
                     } else {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),

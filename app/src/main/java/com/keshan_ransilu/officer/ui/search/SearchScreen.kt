@@ -37,6 +37,7 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.data.registry.RegisterCatalog
 import com.keshan_ransilu.officer.repository.RegisterRepository
 import com.keshan_ransilu.officer.ui.components.EmptyStateCard
+import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.home.HeaderBackgroundFaceted
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.serialization.json.JsonObject
@@ -316,35 +317,21 @@ fun SearchScreen(
 
                     // Content View
                     if (searchQuery.isBlank()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 60.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            EmptyStateCard(
-                                iconRes = R.drawable.ic_empty_records,
-                                title = "Search across division",
-                                description = "Type a citizen name, NIC, vehicle number, or reference number to search all records",
-                                actionText = null,
-                                onActionClick = null
-                            )
-                        }
+                        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                            title = "Search across division",
+                            subtitle = "Type a citizen name, NIC, vehicle number, or reference number to search all records",
+                            iconRes = R.drawable.ic_state_search_empty,
+                            primaryActionText = null,
+                            onPrimaryAction = null
+                        )
                     } else if (searchResults.isEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 60.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            EmptyStateCard(
-                                iconRes = R.drawable.ic_empty_result,
-                                title = "Result not found",
-                                description = "Please try again with another keywords or maybe use generic term",
-                                actionText = "Search again",
-                                onActionClick = { searchQuery = "" }
-                            )
-                        }
+                        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                            title = "Result not found",
+                            subtitle = "Please try again with another keyword or use generic terms",
+                            iconRes = R.drawable.ic_state_hourglass,
+                            primaryActionText = "Search again",
+                            onPrimaryAction = { searchQuery = "" }
+                        )
                     } else {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
