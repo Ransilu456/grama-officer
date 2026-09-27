@@ -225,13 +225,15 @@ fun LoginOfficerScreen(
             Button(
                 onClick = {
                     focusManager.clearFocus()
-                    if (identifier.isBlank() || password.isBlank()) {
+                    val cleanId = identifier.trim()
+                    val cleanPass = password.trim()
+                    if (cleanId.isBlank() || cleanPass.isBlank()) {
                         errorMessage = "Please enter both identifier and password"
                         return@Button
                     }
                     scope.launch {
                         isSubmitting = true
-                        val success = authRepository.login(identifier.trim(), password.trim())
+                        val success = authRepository.login(cleanId, password)
                         isSubmitting = false
                         if (success) {
                             onLoginSuccess()

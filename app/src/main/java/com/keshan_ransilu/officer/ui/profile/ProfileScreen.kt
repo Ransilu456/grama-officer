@@ -118,7 +118,7 @@ fun ProfileScreen(
                 }
 
                 Text(
-                    text = "My Profile",
+                    text = "නිලධාරී ගිණුම",
                     color = Color.White,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -133,7 +133,7 @@ fun ProfileScreen(
                             indication = ripple(bounded = true, color = Color.White),
                             onClick = {
                                 editName = officerAccount?.fullName.orEmpty()
-                                editDivision = officerAccount?.division ?: "142 - Mahara Central"
+                                editDivision = officerAccount?.division.orEmpty()
                                 editEmail = officerAccount?.email.orEmpty()
                                 editPhone = officerAccount?.phone.orEmpty()
                                 showEditProfileSheet = true
@@ -153,7 +153,7 @@ fun ProfileScreen(
                 }
             }
 
-            // Curved Main Body Sheet (Modern iOS Dribbble-inspired Profile layout)
+            // Curved Main Body Sheet
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = ScreenBg,
@@ -168,7 +168,7 @@ fun ProfileScreen(
                 ) {
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Avatar with warm circular accent ring (matching Image 1)
+                    // Avatar with warm circular accent ring
                     Box(
                         modifier = Modifier
                             .size(108.dp)
@@ -191,7 +191,7 @@ fun ProfileScreen(
 
                     // Officer Name & Designation
                     Text(
-                        text = officerAccount?.fullName?.ifBlank { "Grama Niladhari" } ?: "Grama Niladhari",
+                        text = officerAccount?.fullName?.ifBlank { "ග්‍රාම නිලධාරී" } ?: "ග්‍රාම නිලධාරී",
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary,
@@ -199,7 +199,7 @@ fun ProfileScreen(
                     )
 
                     Text(
-                        text = "GN Officer · ${officerAccount?.division ?: "142 - Mahara Central"}",
+                        text = "ග්‍රාම නිලධාරී • ${officerAccount?.division?.ifBlank { "ග්‍රාම නිලධාරී වසම" } ?: "ග්‍රාම නිලධාරී වසම"}",
                         fontSize = 13.sp,
                         color = HeaderBluePrimary,
                         fontWeight = FontWeight.SemiBold,
@@ -213,17 +213,19 @@ fun ProfileScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Surface(
-                            shape = RoundedCornerShape(10.dp),
-                            color = Color(0xFFEFF2F8)
-                        ) {
-                            Text(
-                                text = officerAccount?.officerId ?: "GN/WP/GM/$currentYear/0142",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary,
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
-                            )
+                        if (!officerAccount?.officerId.isNullOrBlank()) {
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = Color(0xFFEFF2F8)
+                            ) {
+                                Text(
+                                    text = officerAccount?.officerId.orEmpty(),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
+                                )
+                            }
                         }
 
                         Surface(
@@ -231,7 +233,7 @@ fun ProfileScreen(
                             color = Color(0xFFE8F8F0)
                         ) {
                             Text(
-                                text = "Active · Year $currentYear",
+                                text = "ක්‍රියාකාරී • $currentYear වර්ෂය",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFF00A844),
@@ -248,28 +250,28 @@ fun ProfileScreen(
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         ProfileMiniStat(
-                            title = "Persons",
+                            title = "පුද්ගලයින්",
                             count = personCount.toString(),
                             iconRes = R.drawable.ic_round_person,
                             modifier = Modifier.weight(1f),
                             onClick = { onNavigateToModule("person") }
                         )
                         ProfileMiniStat(
-                            title = "Requests",
+                            title = "ලිපි ලේඛන",
                             count = letterCount.toString(),
                             iconRes = R.drawable.ic_round_letters,
                             modifier = Modifier.weight(1f),
                             onClick = { onNavigateToModule("letters") }
                         )
                         ProfileMiniStat(
-                            title = "Permits",
+                            title = "බලපත්‍ර",
                             count = permitCount.toString(),
                             iconRes = R.drawable.ic_round_permits,
                             modifier = Modifier.weight(1f),
                             onClick = { onNavigateToModule("permit_recommendations") }
                         )
                         ProfileMiniStat(
-                            title = "Cash Book",
+                            title = "මුදල් පොත",
                             count = aswasumaCount.toString(),
                             iconRes = R.drawable.ic_round_cashbook,
                             modifier = Modifier.weight(1f),
@@ -279,7 +281,7 @@ fun ProfileScreen(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Grouped List Action Cards (iOS Dribbble-inspired menu cards)
+                    // Grouped List Action Cards
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(22.dp),
@@ -290,11 +292,11 @@ fun ProfileScreen(
                             // Item 1: Personal Data & Jurisdiction
                             ProfileMenuItem(
                                 iconRes = R.drawable.ic_dashboard_account,
-                                title = "Personal Data & Jurisdiction",
+                                title = "පුද්ගලික හා වසමේ තොරතුරු",
                                 subtitle = "${officerAccount?.email ?: "gn.division@gov.lk"} · ${officerAccount?.phone ?: "071-2345678"}",
                                 onClick = {
                                     editName = officerAccount?.fullName.orEmpty()
-                                    editDivision = officerAccount?.division ?: "142 - Mahara Central"
+                                    editDivision = officerAccount?.division.orEmpty()
                                     editEmail = officerAccount?.email.orEmpty()
                                     editPhone = officerAccount?.phone.orEmpty()
                                     showEditProfileSheet = true
@@ -306,8 +308,8 @@ fun ProfileScreen(
                             // Item 2: Office Public Hours
                             ProfileMenuItem(
                                 iconRes = R.drawable.ic_dashboard_contact,
-                                title = "Public Service Hours",
-                                subtitle = "Monday - Friday : 8:30 AM - 4:30 PM",
+                                title = "මහජන සේවා කාලය",
+                                subtitle = "සඳුදා - සිකුරාදා : පෙ.ව. 8:30 - ප.ව. 4:30",
                                 onClick = {}
                             )
 
@@ -316,8 +318,8 @@ fun ProfileScreen(
                             // Item 3: Notifications & Circulars
                             ProfileMenuItem(
                                 iconRes = R.drawable.ic_notification_bell,
-                                title = "Notifications & Circulars",
-                                subtitle = "Official updates, directives and alerts",
+                                title = "නිවේදන හා චක්‍රලේඛ",
+                                subtitle = "නිල නිවේදන, චක්‍රලේඛ හා උපදෙස්",
                                 onClick = onNavigateToNotifications
                             )
                         }
@@ -336,12 +338,12 @@ fun ProfileScreen(
                             // Backup Database
                             ProfileMenuItem(
                                 iconRes = R.drawable.ic_dashboard_analytics,
-                                title = "Data Backup & Export",
-                                subtitle = "Backup complete local division records",
+                                title = "දත්ත උපස්ථ කිරීම (Backup)",
+                                subtitle = "වසමේ සියලු දත්ත ආරක්‍ෂිතව සුරකින්න",
                                 onClick = {
                                     scope.launch {
                                         val backupJson = repository.backupAllToJson()
-                                        Toast.makeText(context, "Database backup complete (${backupJson.length} bytes)", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "දත්ත උපස්ථ කිරීම සාර්ථකයි (${backupJson.length} bytes)", Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             )
@@ -351,8 +353,8 @@ fun ProfileScreen(
                             // Logout
                             ProfileMenuItem(
                                 iconRes = R.drawable.ic_empty_connection,
-                                title = "Logout from Session",
-                                subtitle = "Securely end officer portal session",
+                                title = "පද්ධතියෙන් ඉවත් වන්න",
+                                subtitle = "නිලධාරී සැසිය ආරක්‍ෂිතව අවසන් කරන්න",
                                 titleColor = Color(0xFFE53935),
                                 onClick = { showLogoutDialog = true }
                             )
@@ -379,13 +381,13 @@ fun ProfileScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     Text(
-                        text = "Edit Officer Profile",
+                        text = "නිලධාරී තොරතුරු සංස්කරණය",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
                     )
                     Text(
-                        text = "Update your official details and contact information",
+                        text = "ඔබගේ නිල විස්තර හා සබඳතා තොරතුරු යාවත්කාලීන කරන්න",
                         fontSize = 12.sp,
                         color = TextSecondary
                     )
@@ -393,7 +395,7 @@ fun ProfileScreen(
                     OutlinedTextField(
                         value = editName,
                         onValueChange = { editName = it },
-                        label = { Text("Full Name") },
+                        label = { Text("සම්පූර්ණ නම") },
                         leadingIcon = { Icon(painter = painterResource(id = R.drawable.ic_input_person), contentDescription = null, tint = HeaderBluePrimary, modifier = Modifier.size(20.dp)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp)
@@ -402,7 +404,7 @@ fun ProfileScreen(
                     OutlinedTextField(
                         value = editDivision,
                         onValueChange = { editDivision = it },
-                        label = { Text("GN Division") },
+                        label = { Text("ග්‍රාම නිලධාරී වසම") },
                         leadingIcon = { Icon(painter = painterResource(id = R.drawable.ic_input_location), contentDescription = null, tint = HeaderBluePrimary, modifier = Modifier.size(20.dp)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp)
@@ -411,7 +413,7 @@ fun ProfileScreen(
                     OutlinedTextField(
                         value = editEmail,
                         onValueChange = { editEmail = it },
-                        label = { Text("Official Email") },
+                        label = { Text("රාජකාරි ඊමේල් ලිපිනය") },
                         leadingIcon = { Icon(painter = painterResource(id = R.drawable.ic_input_email), contentDescription = null, tint = HeaderBluePrimary, modifier = Modifier.size(20.dp)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp)
@@ -420,7 +422,7 @@ fun ProfileScreen(
                     OutlinedTextField(
                         value = editPhone,
                         onValueChange = { editPhone = it },
-                        label = { Text("Contact Phone") },
+                        label = { Text("දුරකථන අංකය") },
                         leadingIcon = { Icon(painter = painterResource(id = R.drawable.ic_input_phone), contentDescription = null, tint = HeaderBluePrimary, modifier = Modifier.size(20.dp)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp)
@@ -439,7 +441,7 @@ fun ProfileScreen(
                                 )
                                 if (updated != null) {
                                     officerAccount = updated
-                                    Toast.makeText(context, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "තොරතුරු සාර්ථකව සුරකින ලදී", Toast.LENGTH_SHORT).show()
                                 }
                                 showEditProfileSheet = false
                             }
@@ -450,7 +452,7 @@ fun ProfileScreen(
                         shape = RoundedCornerShape(25.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary)
                     ) {
-                        Text("Save Profile Changes", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text("වෙනස්කම් සුරකින්න", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -462,8 +464,8 @@ fun ProfileScreen(
         if (showLogoutDialog) {
             AlertDialog(
                 onDismissRequest = { showLogoutDialog = false },
-                title = { Text("Logout from Officer Portal", fontWeight = FontWeight.Bold) },
-                text = { Text("Are you sure you want to end your current officer session?") },
+                title = { Text("පද්ධතියෙන් ඉවත් වීම", fontWeight = FontWeight.Bold) },
+                text = { Text("ඔබට නිලධාරී ගිණුමෙන් ඉවත් වීමට අවශ්‍ය බව සහතිකද?") },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -472,12 +474,12 @@ fun ProfileScreen(
                             onLogout()
                         }
                     ) {
-                        Text("Logout", color = Color.Red, fontWeight = FontWeight.Bold)
+                        Text("ඉවත් වන්න", color = Color.Red, fontWeight = FontWeight.Bold)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showLogoutDialog = false }) {
-                        Text("Cancel")
+                        Text("අවලංගු කරන්න")
                     }
                 },
                 shape = RoundedCornerShape(20.dp),

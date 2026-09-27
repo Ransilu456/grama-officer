@@ -29,9 +29,6 @@ import com.keshan_ransilu.officer.repository.OfficerAuthRepository
 import com.keshan_ransilu.officer.ui.theme.*
 import java.util.Calendar
 
-/**
- * Premium redesigned Drawer Header showcasing Officer credentials, Division, and verified status.
- */
 @Composable
 fun DrawerProfileHeader(
     onProfileClick: () -> Unit,
@@ -75,7 +72,7 @@ fun DrawerProfileHeader(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "OFFICIAL GN PORTAL",
+                            text = "PORTAL",
                             color = HeaderBluePrimary,
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
@@ -110,7 +107,7 @@ fun DrawerProfileHeader(
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Redesigned Officer Identity Card (Clickable to Profile)
+        // Redesigned Officer Identity Card
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -153,23 +150,25 @@ fun DrawerProfileHeader(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = officerAccount?.fullName?.ifBlank { "Grama Niladhari" } ?: "Grama Niladhari",
+                        text = officerAccount?.fullName?.ifBlank { "ග්‍රාම නිලධාරී" } ?: "ග්‍රාම නිලධාරී",
                         color = TextPrimary,
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
                         maxLines = 1
                     )
                     Spacer(modifier = Modifier.height(2.dp))
+                    if (!officerAccount?.officerId.isNullOrBlank()) {
+                        Text(
+                            text = officerAccount?.officerId.orEmpty(),
+                            color = HeaderBluePrimary,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            maxLines = 1
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                    }
                     Text(
-                        text = officerAccount?.officerId ?: "GN/WP/GM/0142",
-                        color = HeaderBluePrimary,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        maxLines = 1
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = officerAccount?.division ?: "142 - Mahara Central",
+                        text = officerAccount?.division?.ifBlank { "ග්‍රාම නිලධාරී වසම" } ?: "ග්‍රාම නිලධාරී වසම",
                         color = TextSecondary,
                         fontSize = 11.sp,
                         maxLines = 1
@@ -183,9 +182,7 @@ fun DrawerProfileHeader(
     }
 }
 
-/**
- * Modern footer shown at the bottom of the navigation drawer.
- */
+/* FOOTER */
 @Composable
 fun DrawerFooter() {
     val currentYear = remember { Calendar.getInstance().get(Calendar.YEAR) }
@@ -204,14 +201,14 @@ fun DrawerFooter() {
             modifier = Modifier.padding(bottom = 10.dp)
         )
         Text(
-            text = "Officer App · GN Division System",
+            text = "Officer App",
             color = TextSecondary,
             fontSize = 11.sp,
             fontWeight = FontWeight.Medium,
             letterSpacing = 0.4.sp
         )
         Text(
-            text = "© $currentYear Government of Sri Lanka",
+            text = "© $currentYear Emarketing Paradice",
             color = TextSecondary.copy(alpha = 0.6f),
             fontSize = 10.sp
         )

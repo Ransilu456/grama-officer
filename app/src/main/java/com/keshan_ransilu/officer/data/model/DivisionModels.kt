@@ -3,10 +3,6 @@ package com.keshan_ransilu.officer.data.model
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
-// ==========================================
-// CORE POPULATION & CITIZEN MODELS
-// ==========================================
-
 @Serializable
 data class PersonRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -34,11 +30,7 @@ data class HouseholdRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// ==========================================
-// 20 GRAMA NILADHARI OFFICIAL REGISTERS
-// ==========================================
-
-// 01. මුදල් පොත (Cash Book Register)
+// Cash Book
 @Serializable
 data class CashBookRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -55,7 +47,7 @@ data class CashBookRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 02. විෂය ගොනු ලේඛනය (Subject Files Register)
+// Subject Files
 @Serializable
 data class SubjectFileRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -70,12 +62,12 @@ data class SubjectFileRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 03. බඩු වවුචර් හා අංකිත ආකෘති ලේඛනය (Goods Voucher & Counterfoil Forms Register)
+// Goods Voucher
 @Serializable
 data class GoodsVoucherFormRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
-    val formType: String, // උපපත්‍රිකා / අංකිත ආකෘති වර්ගය
+    val formType: String,
     val acquiredDateAndIssuedBy: String = "",
     val printedNumberFrom: String = "",
     val printedNumberTo: String = "",
@@ -86,12 +78,12 @@ data class GoodsVoucherFormRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 04. ලැබෙන හා යවන ලිපි ලේඛනය (Inward & Outward Letters Register)
+// Letters
 @Serializable
 data class InwardOutwardLetterRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
-    val letterType: String = "Inward (ලැබෙන ලිපි)", // Inward or Outward
+    val letterType: String = "Inward (ලැබෙන ලිපි)",
     val date: String = "",
     val letterRefNoAndDate: String = "",
     val senderOrReceiver: String = "",
@@ -103,7 +95,7 @@ data class InwardOutwardLetterRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 05. රජයේ ඉඩම් තොරතුරු ලේඛනය (Government Lands Register)
+// Government Lands
 @Serializable
 data class GovLandRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -120,14 +112,14 @@ data class GovLandRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 06. බලපත්‍ර නිර්දේශ කිරීමේ ලේඛනය (Permit Recommendation Register)
+// Permit Recommendation
 @Serializable
 data class PermitRecommendationRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
     val applicantName: String,
     val applicantAddress: String = "",
-    val permitType: String = "Timber (දැව)", // Timber, Sand, Soil, Transport, Tree Felling, Public Performance
+    val permitType: String = "දැව", // Timber, Sand, Soil, Transport, Tree Felling, Public Performance
     val vehicleNo: String = "",
     val quantity: String = "",
     val date: String = "",
@@ -139,7 +131,7 @@ data class PermitRecommendationRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 07. රජයේ දීමනා හා රැකියා ලේඛනය (Government Allowances, Welfare & Employment Register)
+// Government Allowances, Welfare Allowances, and Housing Allowances
 @Serializable
 data class GovAllowanceRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -148,16 +140,16 @@ data class GovAllowanceRecord(
     val houseNo: String = "",
     val nic: String = "",
     val phone: String = "",
-    val allowanceType: String = "Welfare Allowance (සුබසාධන දීමනා)",
+    val allowanceType: String = "සුබසාධන දීමනා",
     val monthlyAmount: Double = 0.0,
     val startDate: String = "",
-    val employmentStatus: String = "Self-Employed (ස්වයං රැකියා)",
+    val employmentStatus: String = "ස්වයං රැකියා",
     val remarks: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 08. දිස්ත්‍රික් ආපදා කළමනාකරණ හා සහනාධාර ලේඛනය (Disaster Management & Relief Register)
+// Disaster
 @Serializable
 data class DisasterReliefRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -165,7 +157,7 @@ data class DisasterReliefRecord(
     val affectedPersonName: String,
     val houseNo: String = "",
     val phone: String = "",
-    val disasterType: String = "Flood (ගංවතුර)", // Flood, Fire, Drought, Wind, Landslide, Wildlife
+    val disasterType: String = "ගංවතුර", // Flood, Fire, Drought, Wind, Landslide, Wildlife
     val incidentDate: String = "",
     val estimatedDamage: Double = 0.0,
     val reliefReceivedDateAmount: String = "",
@@ -174,25 +166,25 @@ data class DisasterReliefRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 09. අධිකරණ, ළමා හා සමථ මණ්ඩල කටයුතු ලේඛනය (Judicial, Child Care & Mediation Register)
+// Judicial, Child Care
 @Serializable
 data class JudicialMediationRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
     val caseRefNo: String = "",
-    val category: String = "Mediation Board (සමථ මණ්ඩල)", // Mediation Board, Child Rights, Magistrate Court, Maintenance
+    val category: String = "සමථ මණ්ඩල", // Mediation Board, Child Rights, Magistrate Court, Maintenance
     val complainantName: String,
     val respondentName: String = "",
     val disputeNature: String = "",
     val hearingDate: String = "",
     val actionTakenOrder: String = "",
-    val status: String = "Settled (සමථයට පත්විය)",
+    val status: String = "සමථයට පත්විය",
     val remarks: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 10. ආයුර්වේද හා සෞඛ්‍ය ලේඛනය (Ayurveda & Health Care Register)
+// Ayurveda & Health Care
 @Serializable
 data class AyurvedaHealthRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -200,7 +192,7 @@ data class AyurvedaHealthRecord(
     val patientOrProgramName: String,
     val houseNo: String = "",
     val phone: String = "",
-    val category: String = "Ayurveda Treatment (ආයුර්වේද ප්‍රතිකාර)", // Ayurveda, Dengue Prevention, Clinic Program, Traditional Medicine
+    val category: String = "ආයුර්වේද ප්‍රතිකාර", // Ayurveda, Dengue Prevention, Clinic Program, Traditional Medicine
     val date: String = "",
     val officerOrDoctorInCharge: String = "",
     val details: String = "",
@@ -209,7 +201,7 @@ data class AyurvedaHealthRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 11. වසමේ සංවර්ධන ව්‍යාපෘති තොරතුරු ලේඛනය (Development Projects Register)
+// Development Projects
 @Serializable
 data class DevelopmentProjectRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -220,13 +212,13 @@ data class DevelopmentProjectRecord(
     val implementingAgency: String = "",
     val startDate: String = "",
     val expectedEndDate: String = "",
-    val progressStatus: String = "In Progress (ක්‍රියාත්මක වෙමින් පවතී)",
+    val progressStatus: String = "ක්‍රියාත්මක වෙමින් පවතී",
     val remarks: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 12. පදිංචිය භාරගැනීම්, හැරයෑම් හා තාවකාලික පදිංචිකරුවන්ගේ ලේඛනය (Residency Arrivals/Departures & Temporary Residents)
+// Residency Arrivals/Departures
 @Serializable
 data class ResidencyChangeRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -235,7 +227,7 @@ data class ResidencyChangeRecord(
     val nic: String = "",
     val houseNo: String = "",
     val phone: String = "",
-    val changeType: String = "Arrival (පදිංචියට පැමිණීම)", // Arrival, Departure, Temporary Resident
+    val changeType: String = "පදිංචියට පැමිණීම", // Arrival, Departure, Temporary Resident
     val eventDate: String = "",
     val previousOrNewAddress: String = "",
     val reason: String = "",
@@ -245,7 +237,7 @@ data class ResidencyChangeRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 13. දිවුරුම් සහතික නිකුත් කිරීමේ ලේඛනය (Affidavits Issued Register)
+// Affidavits Issued
 @Serializable
 data class AffidavitIssueRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -253,7 +245,7 @@ data class AffidavitIssueRecord(
     val applicantName: String,
     val nic: String = "",
     val address: String = "",
-    val affidavitPurpose: String, // Reason for affidavit (Income, Non-Employment, Character, Loss of NIC)
+    val affidavitPurpose: String, // Income, Non-Employment, Character, Loss of NIC
     val issueDate: String = "",
     val certNo: String = "",
     val dsOfficeRef: String = "",
@@ -262,34 +254,34 @@ data class AffidavitIssueRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 14. ව්‍යාපාර නාම ලියාපදිංචි කිරීම සඳහා නිර්දේශ කිරීම් ලේඛනය (Business Name Registration Recommendation Register)
+// Business Name Registration Recommendation
 @Serializable
 data class BusinessRegistrationRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
     val businessNameAndAddress: String,
     val ownerNameAddressPhoneNic: String = "",
-    val businessNature: String = "Sole Proprietorship (තනි පුද්ගල ව්‍යාපාර)", // Sole Proprietorship, Partnership
+    val businessNature: String = "තනි පුද්ගල ව්‍යාපාර", // Sole Proprietorship, Partnership
     val startedDate: String = "",
     val recommendedDateAndDsReceiptNo: String = "",
     val premisesOwnershipDetails: String = "",
     val registrationNoAndDate: String = "",
-    val applicantSignatureStatus: String = "Signed (අත්සන් කෙරිණි)",
+    val applicantSignatureStatus: String = "අත්සන් කෙරිණි",
     val remarks: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 15. උපත් හා මරණ වාර්තා ලේඛනය (Birth & Death Reports Register)
+// Birth & Death Reports
 @Serializable
 data class BirthDeathReportRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
-    val reportType: String = "Death Report (මරණ වාර්තාව)", // Birth Report, Death Report
-    val subjectName: String, // Deceased Name or Child Name
+    val reportType: String = "මරණ වාර්තාව", // Birth Report, Death Report
+    val subjectName: String,
     val nicOrParentsInfo: String = "",
-    val eventDate: String = "", // Date of death or birth
-    val eventPlace: String = "", // Place of death or birth
+    val eventDate: String = "",
+    val eventPlace: String = "",
     val causeOrBirthWeight: String = "",
     val reportNoAndDate: String = "",
     val takenToRegistrarPersonNamePhone: String = "",
@@ -298,12 +290,12 @@ data class BirthDeathReportRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 16. විශ්‍රාම වැටුප් ලේඛනය (Pensions Register: Public, Farmers, Social Security)
+// Pensions Register:
 @Serializable
 data class PensionRegistryRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
-    val pensionType: String = "Public Pension (රාජ්‍ය විශ්‍රාම වැටුප්)", // Public Pension, Farmers Pension, Social Security Pension
+    val pensionType: String = "රාජ්‍ය විශ්‍රාම වැටුප්", // Public Pension, Farmers Pension, Social Security Pension
     val pensionNo: String = "",
     val pensionerName: String,
     val addressAndHouseNo: String = "",
@@ -312,7 +304,7 @@ data class PensionRegistryRecord(
     val paymentOfficeOrBankAcc: String = "",
     val heldDesignation: String = "",
     val guardianNameAndAddress: String = "",
-    val maritalStatus: String = "Married (විවාහක)",
+    val maritalStatus: String = "විවාහක",
     val monthlyAmount: Double = 0.0,
     val dateReportedToDS: String = "",
     val remarks: String = "",
@@ -320,7 +312,7 @@ data class PensionRegistryRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 17. ගර්භණී මව්වරුන් සඳහා පෝෂණ දීමනාව ලබාදීමේ ලේඛනය (Maternity Nutrition Allowance Register)
+// Maternity Nutrition Allowance
 @Serializable
 data class MaternityNutritionRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -336,12 +328,12 @@ data class MaternityNutritionRecord(
     val voucherNo: String = "",
     val voucherIssueDate: String = "",
     val recipientNameNic: String = "",
-    val signatureStatus: String = "Signed / Received (භාරගන්නා ලදී)",
+    val signatureStatus: String = "භාරගන්නා ලදී",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 18. ක්ෂේත්‍ර නිලධාරීන් වසමට පැමිණීම සටහන් කිරීමේ අත්සන් සහතික කිරීමේ ලේඛනය (Field Officers Visit Register)
+// Field Officers Visit
 @Serializable
 data class FieldOfficerVisitRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -355,7 +347,7 @@ data class FieldOfficerVisitRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 19. සමිති සංවිධාන / පොදු වැඩසටහන් තොරතුරු ලේඛනය (Community Organizations & Public Programs Register)
+// Community Organizations
 @Serializable
 data class CommunityOrgRecord(
     val id: String = UUID.randomUUID().toString(),
@@ -372,12 +364,12 @@ data class CommunityOrgRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// 20. විවිධ තොරතුරු ලේඛනය (Miscellaneous Information Register)
+// Miscellaneous Information
 @Serializable
 data class MiscInfoRecord(
     val id: String = UUID.randomUUID().toString(),
     val serialNo: String = "",
-    val categoryTitle: String = "General (පොදු තොරතුරු)",
+    val categoryTitle: String = "පොදු තොරතුරු",
     val subject: String,
     val date: String = "",
     val detailedDescription: String = "",
@@ -387,9 +379,6 @@ data class MiscInfoRecord(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-// ==========================================
-// ADDITIONAL WELFARE & COMPATIBILITY MODELS
-// ==========================================
 
 @Serializable
 data class AswasumaRecord(

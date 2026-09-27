@@ -28,7 +28,6 @@ class OfficerAuthRepository(private val context: Context) {
         try {
             json.decodeFromString<OfficerAccount>(accountFile.readText())
         } catch (e: Exception) {
-            e.printStackTrace()
             null
         }
     }
@@ -45,6 +44,7 @@ class OfficerAuthRepository(private val context: Context) {
         phone: String,
         password: String
     ): Boolean = withContext(Dispatchers.IO) {
+        if (password.length < 6) return@withContext false
         try {
             val hash = hashPassword(password)
             val account = OfficerAccount(
@@ -62,7 +62,6 @@ class OfficerAuthRepository(private val context: Context) {
             setLoggedIn(true)
             true
         } catch (e: Exception) {
-            e.printStackTrace()
             false
         }
     }
@@ -90,7 +89,7 @@ class OfficerAuthRepository(private val context: Context) {
         val inputHash = hashPassword(password)
         val matchId = account.officerId.equals(identifier.trim(), ignoreCase = true) ||
                 account.email.equals(identifier.trim(), ignoreCase = true)
-        val matchPassword = account.passwordHash == inputHash || password == "admin123" // Fallback for dev demo
+        val matchPassword = account.passwordHash == inputHash
         if (matchId && matchPassword) {
             val updated = account.copy(lastLoginAt = System.currentTimeMillis())
             accountFile.writeText(json.encodeToString(updated))
@@ -114,11 +113,7 @@ class OfficerAuthRepository(private val context: Context) {
     }
 
     private fun hashPassword(password: String): String {
-        return try {
-            val bytes = MessageDigest.getInstance("SHA-256").digest(password.toByteArray())
-            bytes.joinToString("") { "%02x".format(it) }
-        } catch (e: Exception) {
-            password.hashCode().toString()
-        }
+        val bytes = MessageDigest.getInstance("SHA-256").digest(password.toByteArray())
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 }

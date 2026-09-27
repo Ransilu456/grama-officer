@@ -1,6 +1,5 @@
 package com.keshan_ransilu.officer.ui.modulelist
 
-import androidx.compose.animation.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,7 +37,9 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.data.registry.RegisterCatalog
 import com.keshan_ransilu.officer.data.registry.RegisterModule
 import com.keshan_ransilu.officer.repository.RegisterRepository
+import com.keshan_ransilu.officer.ui.components.DisasterTypeBadge
 import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
+import com.keshan_ransilu.officer.ui.components.StatusBadge
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonObject
@@ -91,16 +92,16 @@ fun ModuleListScreen(
             .background(ScreenBg)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Screen Header (without notification icon)
+            // Screen Header
             ListScreenHeader(
-                title = module?.titleEn ?: "Search Records",
-                subtitle = module?.titleSi ?: "",
+                title = module?.titleSi ?: "නිල ලේඛනය",
+                subtitle = "",
                 searchQuery = searchQuery,
                 onSearchChange = { searchQuery = it },
                 onBackClick = onBackClick
             )
 
-            // Flat Category Filter Chips (No shadows, no borders)
+            // Flat Category Filter Chips
             val dropdownField = module?.fields?.firstOrNull { it.options.isNotEmpty() }
             if (dropdownField != null && dropdownField.options.isNotEmpty()) {
                 ScrollableCategoryRow(
@@ -114,16 +115,19 @@ fun ModuleListScreen(
                 Spacer(modifier = Modifier.height(6.dp))
             }
 
-            // Records List (Flat Cards, No Shadows, No Borders)
+            // Records List
             if (filteredRecords.isEmpty()) {
                 EmptyListPlaceholder(
                     query = searchQuery,
                     onAddClick = onAddClick,
-                    onClearQuery = { searchQuery = "" }
+                    onClearQuery = { searchQuery = "" },
+                    modifier = Modifier.weight(1f)
                 )
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
                     contentPadding = PaddingValues(
                         start = 20.dp,
                         end = 20.dp,
@@ -427,7 +431,10 @@ fun RecordListItemCard(
         it.key.contains("rate", ignoreCase = true) ||
                 it.key.contains("amount", ignoreCase = true) ||
                 it.key.contains("monthlyAid", ignoreCase = true) ||
-                it.key.contains("received", ignoreCase = true)
+                it.key.contains("received", ignoreCase = true) ||
+                it.key.contains("paid", ignoreCase = true) ||
+                it.key.contains("estimatedBudget", ignoreCase = true) ||
+                it.key.contains("estimatedDamage", ignoreCase = true)
     }?.key
 
     val subtitleField = module?.fields?.firstOrNull {
@@ -437,7 +444,6 @@ fun RecordListItemCard(
                         it.key.contains("phone", ignoreCase = true) ||
                         it.key.contains("subject", ignoreCase = true) ||
                         it.key.contains("vehicle", ignoreCase = true) ||
-                        it.key.contains("date", ignoreCase = true) ||
                         it.key.contains("address", ignoreCase = true) ||
                         it.key.contains("category", ignoreCase = true) ||
                         it.key.contains("extent", ignoreCase = true) ||
@@ -446,8 +452,22 @@ fun RecordListItemCard(
                 )
     }?.key ?: module?.fields?.getOrNull(1)?.key ?: ""
 
+    val dateField = module?.fields?.firstOrNull {
+        it.key.contains("date", ignoreCase = true) || it.key.contains("dob", ignoreCase = true)
+    }?.key
+
+    val statusValue = record["status"]?.jsonPrimitive?.content
+        ?: record["recommendationStatus"]?.jsonPrimitive?.content
+        ?: record["progressStatus"]?.jsonPrimitive?.content
+        ?: record["applicantSignatureStatus"]?.jsonPrimitive?.content
+        ?: record["signatureStatus"]?.jsonPrimitive?.content
+        ?: record["maritalStatus"]?.jsonPrimitive?.content
+
+    val disasterTypeValue = record["disasterType"]?.jsonPrimitive?.content
+
     val titleValue = record[titleField]?.jsonPrimitive?.content ?: "Record Entry"
     val subtitleValue = record[subtitleField]?.jsonPrimitive?.content ?: ""
+    val dateValue = dateField?.let { record[it]?.jsonPrimitive?.content }
     val rateValue = rateField?.let { record[it]?.jsonPrimitive?.content }
 
     Card(
@@ -488,18 +508,10 @@ fun RecordListItemCard(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(3.dp))
 
-                // Rate / Subtitle
-                if (!rateValue.isNullOrBlank()) {
-                    Text(
-                        text = if (rateValue.startsWith("$") || rateValue.endsWith("/ hour")) rateValue else "$$rateValue / hour",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF00897B),
-                        maxLines = 1
-                    )
-                } else if (subtitleValue.isNotBlank()) {
+                // Subtitle or Amount or Date
+                if (subtitleValue.isNotBlank()) {
                     Text(
                         text = subtitleValue,
                         fontSize = 13.sp,
@@ -508,39 +520,74 @@ fun RecordListItemCard(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
+
+                if (!rateValue.isNullOrBlank()) {
+                    Text(
+                        text = if (rateValue.startsWith("LKR") || rateValue.startsWith("Rs")) rateValue else "LKR $rateValue",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF00897B),
+                        maxLines = 1
+                    )
+                } else if (!dateValue.isNullOrBlank() && subtitleValue.isBlank()) {
+                    Text(
+                        text = dateValue,
+                        fontSize = 12.sp,
+                        color = TextSecondary,
+                        maxLines = 1
+                    )
+                }
             }
 
-            // Gold Medal Badge
-            Image(
-                painter = painterResource(id = R.drawable.ic_medal_badge),
-                contentDescription = "Rating Medal",
-                modifier = Modifier.size(28.dp)
-            )
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Badges Column / Indicator
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                if (!disasterTypeValue.isNullOrBlank()) {
+                    DisasterTypeBadge(disasterType = disasterTypeValue)
+                }
+
+                if (!statusValue.isNullOrBlank()) {
+                    StatusBadge(status = statusValue)
+                } else if (disasterTypeValue.isNullOrBlank()) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_medal_badge),
+                        contentDescription = "Rating Medal",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
 fun EmptyListPlaceholder(
+    modifier: Modifier = Modifier,
     query: String,
     onAddClick: () -> Unit,
-    onClearQuery: () -> Unit = {}
+    onClearQuery: () -> Unit = {},
 ) {
     if (query.isNotBlank()) {
-        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
-            title = "Result not found",
-            subtitle = "Please try again with another keyword or use generic terms",
+        IllustratedStateScreen(
+            title = "කිසිදු සටහනක් හමු නොවීය",
+            subtitle = "වෙනත් නමක්, අංකයක් හෝ වචනයක් යොදා නැවත සොයා බලන්න",
             iconRes = R.drawable.ic_state_search_empty,
-            primaryActionText = "Search again",
-            onPrimaryAction = onClearQuery
+            primaryActionText = "සෙවුම ඉවත් කරන්න",
+            onPrimaryAction = onClearQuery,
+            modifier = modifier
         )
     } else {
-        com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
-            title = "No records yet",
-            subtitle = "There are no records in this official register. Tap below to create your first entry.",
+        IllustratedStateScreen(
+            title = "තවමත් සටහන් ඇතුළත් කර නොමැත",
+            subtitle = "මෙම නිල ලේඛනයේ සටහන් කිසිවක් නොමැත. පහත බොත්තම ඔබා නව සටහනක් එක් කරන්න.",
             iconRes = R.drawable.ic_state_empty_box,
-            primaryActionText = "Add New Record",
-            onPrimaryAction = onAddClick
+            primaryActionText = "නව සටහනක් එක් කරන්න",
+            onPrimaryAction = onAddClick,
+            modifier = modifier
         )
     }
 }

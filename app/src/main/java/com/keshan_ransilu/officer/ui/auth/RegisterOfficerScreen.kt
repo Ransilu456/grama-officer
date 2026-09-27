@@ -12,7 +12,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.ripple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,7 +23,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -33,7 +31,6 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.repository.OfficerAuthRepository
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +43,6 @@ fun RegisterOfficerScreen(
     val scope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
-    val currentYear = remember { Calendar.getInstance().get(Calendar.YEAR) }
 
     var fullName by remember { mutableStateOf("") }
     var officerId by remember { mutableStateOf("") }
@@ -61,12 +57,12 @@ fun RegisterOfficerScreen(
 
     fun validate(): Boolean {
         val newErrors = mutableMapOf<String, String>()
-        if (fullName.isBlank()) newErrors["fullName"] = "Full name is required"
-        if (officerId.isBlank()) newErrors["officerId"] = "Officer ID is required"
-        if (division.isBlank()) newErrors["division"] = "GN Division is required"
-        if (email.isBlank() || !email.contains("@")) newErrors["email"] = "Valid email is required"
-        if (phone.isBlank() || phone.length < 9) newErrors["phone"] = "Valid phone number is required"
-        if (password.length < 4) newErrors["password"] = "Password must be at least 4 characters"
+        if (fullName.trim().isBlank()) newErrors["fullName"] = "Full name is required"
+        if (officerId.trim().isBlank()) newErrors["officerId"] = "Officer ID is required"
+        if (division.trim().isBlank()) newErrors["division"] = "GN Division is required"
+        if (email.trim().isBlank() || !email.contains("@")) newErrors["email"] = "Valid email is required"
+        if (phone.trim().isBlank() || phone.trim().length < 10) newErrors["phone"] = "Valid 10-digit phone number is required"
+        if (password.length < 6) newErrors["password"] = "Password must be at least 6 characters"
         if (password != confirmPassword) newErrors["confirmPassword"] = "Passwords do not match"
 
         errors = newErrors

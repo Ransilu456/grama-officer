@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.repository.RegisterRepository
-import com.keshan_ransilu.officer.ui.components.EmptyStateCard
 import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.home.HeaderBackgroundFaceted
 import com.keshan_ransilu.officer.ui.theme.*
@@ -250,25 +249,29 @@ fun RequestsScreen(
 
                     if (filteredRecords.isEmpty()) {
                         if (searchQuery.isNotBlank()) {
-                            com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                            IllustratedStateScreen(
                                 title = "Result not found",
                                 subtitle = "Please try again with another keyword or check the reference number",
                                 iconRes = R.drawable.ic_state_search_empty,
                                 primaryActionText = "Clear Search",
-                                onPrimaryAction = { searchQuery = "" }
+                                onPrimaryAction = { searchQuery = "" },
+                                modifier = Modifier.weight(1f)
                             )
                         } else {
-                            com.keshan_ransilu.officer.ui.components.IllustratedStateScreen(
+                            IllustratedStateScreen(
                                 title = "No requests yet",
                                 subtitle = "When you have citizen requests or official letters, you'll see them here",
                                 iconRes = R.drawable.ic_state_empty_box,
                                 primaryActionText = "New Request",
-                                onPrimaryAction = onAddRequestClick
+                                onPrimaryAction = onAddRequestClick,
+                                modifier = Modifier.weight(1f)
                             )
                         }
                     } else {
                         LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(),
                             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 120.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {

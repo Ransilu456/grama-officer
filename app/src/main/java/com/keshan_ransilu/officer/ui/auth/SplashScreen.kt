@@ -22,6 +22,7 @@ import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.ui.theme.*
 import kotlinx.coroutines.delay
 import java.util.Calendar
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun SplashScreen(
@@ -32,7 +33,7 @@ fun SplashScreen(
 
     LaunchedEffect(Unit) {
         startAnimation = true
-        delay(1400)
+        delay(1400.milliseconds)
         onNavigateNext()
     }
 

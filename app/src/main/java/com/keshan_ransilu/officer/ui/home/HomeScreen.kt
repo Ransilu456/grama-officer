@@ -13,8 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ripple
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,6 +21,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.data.registry.DashboardGridItems
 import com.keshan_ransilu.officer.data.registry.DashboardItem
+import com.keshan_ransilu.officer.repository.OfficerAuthRepository
 import com.keshan_ransilu.officer.ui.theme.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,7 +46,6 @@ fun HomeScreen(
             .fillMaxSize()
             .background(HeaderBluePrimary)
     ) {
-        // Geometric Faceted Polygonal Background Header
         HeaderBackgroundFaceted(
             modifier = Modifier
                 .fillMaxWidth()
@@ -55,7 +55,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Top Bar & Dashboard Title Header
+            // Top Bar
             HomeTopHeader(
                 onMenuClick = onMenuClick,
                 onProfileClick = onProfileClick
@@ -102,6 +102,17 @@ fun HomeTopHeader(
     onMenuClick: () -> Unit,
     onProfileClick: () -> Unit
 ) {
+    val context = LocalContext.current
+    val authRepository = remember { OfficerAuthRepository(context) }
+    var divisionName by remember { mutableStateOf("ග්‍රාම නිලධාරී වසම") }
+
+    LaunchedEffect(Unit) {
+        val account = authRepository.getOfficerAccount()
+        if (account != null && account.division.isNotBlank()) {
+            divisionName = account.division
+        }
+    }
+
     val dateStr = remember {
         val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
         formatter.format(Date())
@@ -152,27 +163,27 @@ fun HomeTopHeader(
             }
         }
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
         // Title & Update Subtitle
         Text(
-            text = "Dashboard",
+            text = "පාලන පුවරුව",
             color = Color.White,
-            fontSize = 30.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.3.sp
         )
 
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "Last Update $dateStr",
-            color = Color.White.copy(alpha = 0.75f),
+            text = "$divisionName • $dateStr",
+            color = Color.White.copy(alpha = 0.85f),
             fontSize = 13.sp,
             fontWeight = FontWeight.Normal
         )
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(14.dp))
     }
 }
 
@@ -202,28 +213,26 @@ fun DashboardCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 14.dp, vertical = 18.dp),
+                .padding(horizontal = 10.dp, vertical = 14.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Illustrated Custom Vector Icon
             Image(
                 painter = painterResource(id = item.iconRes),
                 contentDescription = item.title,
                 modifier = Modifier
-                    .size(68.dp)
+                    .size(62.dp)
                     .padding(2.dp)
             )
 
-            Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-            // Main English Label
             Text(
                 text = item.title,
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF8E9AA8),
+                fontWeight = FontWeight.Bold,
+                color = TextPrimary,
                 fontSize = 14.sp,
                 maxLines = 1
             )
@@ -235,7 +244,7 @@ fun DashboardCard(
                 text = item.subtitle,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
-                color = Color(0xFFB0B7C3),
+                color = TextSecondary,
                 fontSize = 11.sp,
                 maxLines = 1
             )
@@ -249,7 +258,6 @@ fun HeaderBackgroundFaceted(modifier: Modifier = Modifier) {
         val width = size.width
         val height = size.height
 
-        // Deep blue gradient base
         drawRect(
             brush = Brush.verticalGradient(
                 colors = listOf(
@@ -260,7 +268,6 @@ fun HeaderBackgroundFaceted(modifier: Modifier = Modifier) {
             )
         )
 
-        // Faceted Triangle 1 (Top Left to Center)
         val path1 = Path().apply {
             moveTo(0f, 0f)
             lineTo(width * 0.7f, 0f)
@@ -272,7 +279,6 @@ fun HeaderBackgroundFaceted(modifier: Modifier = Modifier) {
             color = Color.White.copy(alpha = 0.04f)
         )
 
-        // Faceted Triangle 2 (Top Right Angled)
         val path2 = Path().apply {
             moveTo(width * 0.45f, 0f)
             lineTo(width, 0f)
@@ -285,7 +291,6 @@ fun HeaderBackgroundFaceted(modifier: Modifier = Modifier) {
             color = Color.White.copy(alpha = 0.06f)
         )
 
-        // Subtle bottom triangle
         val path3 = Path().apply {
             moveTo(0f, height * 0.4f)
             lineTo(width * 0.4f, height)

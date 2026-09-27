@@ -8,7 +8,6 @@ import com.keshan_ransilu.officer.data.storage.JsonStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.*
-import java.io.File
 import java.util.UUID
 
 class RegisterRepository(
@@ -103,41 +102,6 @@ class RegisterRepository(
         }
     }
 
-    suspend fun searchAllModules(query: String): Map<String, List<JsonObject>> = withContext(Dispatchers.IO) {
-        val results = mutableMapOf<String, List<JsonObject>>()
-        val cleanQuery = query.trim()
-        if (cleanQuery.isBlank()) return@withContext results
-
-        RegisterCatalog.forEach { module ->
-            val records = getAll(module.id)
-            val matching = records.filter { record ->
-                record.values.any { it.jsonPrimitive.content.contains(cleanQuery, ignoreCase = true) }
-            }
-            if (matching.isNotEmpty()) {
-                results[module.id] = matching
-            }
-        }
-        results
-    }
-
-    suspend fun getRegisterCounts(): Map<String, Int> = withContext(Dispatchers.IO) {
-        val counts = mutableMapOf<String, Int>()
-        RegisterCatalog.forEach { module ->
-            counts[module.id] = getAll(module.id).size
-        }
-        counts
-    }
-
-    suspend fun clearAllSampleData() = withContext(Dispatchers.IO) {
-        val registersDir = File(context.filesDir, "registers")
-        if (registersDir.exists()) {
-            registersDir.listFiles()?.forEach { file ->
-                file.delete()
-            }
-        }
-        notificationRepo.clearAll()
-    }
-
     suspend fun backupAllToJson(): String = withContext(Dispatchers.IO) {
         val fullDatabase = mutableMapOf<String, JsonElement>()
         RegisterCatalog.forEach { module ->
@@ -149,38 +113,81 @@ class RegisterRepository(
         json.encodeToString(JsonObject.serializer(), root)
     }
 
-    fun validate(module: RegisterModule, data: Map<String, String>): Map<String, String> {
+    suspend fun validate(
+        module: RegisterModule,
+        data: Map<String, String>,
+        existingId: String? = null
+    ): Map<String, String> = withContext(Dispatchers.IO) {
         val errors = mutableMapOf<String, String>()
+        val existingRecords by lazy { store.readAll<JsonObject>(module.id) }
+
         module.fields.forEach { field ->
-            val value = data[field.key]?.trim().orEmpty()
-            if (field.required && value.isBlank()) {
-                errors[field.key] = "${field.label.substringBefore('/')} is required"
+            val rawValue = data[field.key]?.trim().orEmpty()
+            val fieldNameSi = field.label.substringBefore('/').trim()
+
+            // 1. Strict Required Check
+            if (field.required && rawValue.isBlank()) {
+                errors[field.key] = "$fieldNameSi අනිවාර්ය වේ (Required)"
                 return@forEach
             }
 
-            if (value.isNotBlank()) {
-                field.validation?.let { validation ->
-                    validation.regex?.let { pattern ->
-                        if (!Regex(pattern).matches(value)) {
-                            errors[field.key] = validation.errorMessage ?: "Invalid format"
+            // 2. Strict Type & Format Validation
+            if (rawValue.isNotBlank()) {
+                when (field.type) {
+                    FieldType.NUMBER -> {
+                        val num = rawValue.toDoubleOrNull()
+                        if (num == null) {
+                            errors[field.key] = "කරුණාකර වලංගු අංකයක් ඇතුළත් කරන්න (Invalid Number)"
+                        } else {
+                            if (field.validation?.min != null && num < field.validation.min) {
+                                errors[field.key] = "අවම අගය ${field.validation.min} විය යුතුය"
+                            }
+                            if (field.validation?.max != null && num > field.validation.max) {
+                                errors[field.key] = "උපරිම අගය ${field.validation.max} විය යුතුය"
+                            }
                         }
                     }
-                    if (field.type == FieldType.NUMBER) {
-                        val num = value.toDoubleOrNull()
-                        if (num == null) {
-                            errors[field.key] = "Please enter a valid number"
-                        } else {
-                            if (validation.min != null && num < validation.min) {
-                                errors[field.key] = "Minimum value is ${validation.min}"
-                            }
-                            if (validation.max != null && num > validation.max) {
-                                errors[field.key] = "Maximum value is ${validation.max}"
-                            }
+                    FieldType.NIC -> {
+                        val nicRegex = Regex("^([0-9]{9}[xXvV]|[0-9]{12})$")
+                        if (!nicRegex.matches(rawValue)) {
+                            errors[field.key] = "අවලංගු හැඳුනුම්පත් අංකයකි (Invalid NIC)"
                         }
+                    }
+                    FieldType.PHONE -> {
+                        val phoneRegex = Regex("^0[0-9]{9}$")
+                        if (!phoneRegex.matches(rawValue)) {
+                            errors[field.key] = "අවලංගු දුරකථන අංකයකි (e.g. 0712345678)"
+                        }
+                    }
+                    FieldType.DATE -> {
+                        val dateRegex = Regex("^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+                        if (!dateRegex.matches(rawValue)) {
+                            errors[field.key] = "දිනය YYYY-MM-DD ලෙස තිබිය යුතුය"
+                        }
+                    }
+                    else -> {}
+                }
+
+                // 3. Strict Custom Regex Validation
+                field.validation?.regex?.let { pattern ->
+                    if (!errors.containsKey(field.key) && !Regex(pattern).matches(rawValue)) {
+                        errors[field.key] = field.validation.errorMessage ?: "වැරදි ආකෘතියකි (Invalid format)"
+                    }
+                }
+
+                // 4. Strict Uniqueness Check
+                if (field.isUnique && !errors.containsKey(field.key)) {
+                    val duplicate = existingRecords.any { rec ->
+                        val recId = rec["id"]?.jsonPrimitive?.content
+                        val recVal = rec[field.key]?.jsonPrimitive?.content?.trim()
+                        recId != existingId && recVal.equals(rawValue, ignoreCase = true)
+                    }
+                    if (duplicate) {
+                        errors[field.key] = "$fieldNameSi '$rawValue' දැනටමත් ලියාපදිංචි කර ඇත (Duplicate)"
                     }
                 }
             }
         }
-        return errors
+        errors
     }
 }

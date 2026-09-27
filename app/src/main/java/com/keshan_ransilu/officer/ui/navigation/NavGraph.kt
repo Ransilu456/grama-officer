@@ -106,11 +106,11 @@ fun NavGraph(
                             .padding(horizontal = 14.dp, vertical = 8.dp)
                     ) {
                         Text(
-                            "ALL REGISTERS & SERVICES",
+                            "සියලු ලේඛන හා සේවා",
                             color = TextSecondary,
-                            fontSize = 11.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.8.sp,
+                            letterSpacing = 0.5.sp,
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                         )
 
@@ -142,7 +142,7 @@ fun NavGraph(
                                     Row(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(horizontal = 10.dp, vertical = 8.dp),
+                                            .padding(horizontal = 10.dp, vertical = 10.dp),
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Image(
@@ -153,19 +153,13 @@ fun NavGraph(
 
                                         Spacer(Modifier.width(12.dp))
 
-                                        Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                module.titleEn,
-                                                color = if (isSelected) HeaderBluePrimary else TextPrimary,
-                                                fontSize = 13.sp,
-                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
-                                            )
-                                            Text(
-                                                module.titleSi,
-                                                color = TextSecondary,
-                                                fontSize = 11.sp
-                                            )
-                                        }
+                                        Text(
+                                            module.titleSi,
+                                            color = if (isSelected) HeaderBluePrimary else TextPrimary,
+                                            fontSize = 14.sp,
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                            modifier = Modifier.weight(1f)
+                                        )
 
                                         Icon(
                                             imageVector = Icons.Default.ChevronRight,
@@ -376,16 +370,6 @@ fun NavGraph(
                     )
                 }
 
-                // Global Search Screen
-                composable("search") {
-                    com.keshan_ransilu.officer.ui.search.SearchScreen(
-                        onBackClick = { navController.popBackStack() },
-                        onRecordClick = { modId, recId ->
-                            navController.navigate("module/$modId/form?recordId=$recId")
-                        }
-                    )
-                }
-
                 composable(
                     route = "module/{moduleId}",
                     arguments = listOf(navArgument("moduleId") { type = NavType.StringType })
@@ -453,13 +437,13 @@ fun NavGraph(
                             .padding(24.dp)
                     ) {
                         Text(
-                            "Quick Navigation",
+                            "ක්ෂණික පිවිසුම",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
                         )
                         Text(
-                            "Select a register or service to view",
+                            "අවශ්‍ය ලේඛනය හෝ සේවාව තෝරන්න",
                             fontSize = 13.sp,
                             color = TextSecondary
                         )
@@ -488,7 +472,7 @@ fun NavGraph(
                                         }
                                 ) {
                                     Row(
-                                        modifier = Modifier.padding(12.dp),
+                                        modifier = Modifier.padding(14.dp),
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Image(
@@ -497,19 +481,13 @@ fun NavGraph(
                                             modifier = Modifier.size(34.dp)
                                         )
                                         Spacer(modifier = Modifier.width(14.dp))
-                                        Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                item.titleEn,
-                                                fontWeight = FontWeight.Bold,
-                                                color = TextPrimary,
-                                                fontSize = 14.sp
-                                            )
-                                            Text(
-                                                item.titleSi,
-                                                color = TextSecondary,
-                                                fontSize = 11.sp
-                                            )
-                                        }
+                                        Text(
+                                            item.titleSi,
+                                            fontWeight = FontWeight.Bold,
+                                            color = TextPrimary,
+                                            fontSize = 14.sp,
+                                            modifier = Modifier.weight(1f)
+                                        )
                                         Icon(
                                             imageVector = Icons.Default.ChevronRight,
                                             contentDescription = null,

@@ -43,7 +43,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun OfficerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Keep consistent custom design aesthetic
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

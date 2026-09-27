@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import com.keshan_ransilu.officer.R
 import com.keshan_ransilu.officer.repository.NotificationModel
 import com.keshan_ransilu.officer.repository.NotificationRepository
-import com.keshan_ransilu.officer.ui.components.EmptyStateCard
 import com.keshan_ransilu.officer.ui.components.IllustratedStateScreen
 import com.keshan_ransilu.officer.ui.home.HeaderBackgroundFaceted
 import com.keshan_ransilu.officer.ui.theme.*
@@ -235,11 +234,14 @@ fun NotificationsScreen(
                             subtitle = "Whenever records or certificates are registered or updated, official alerts will appear here.",
                             iconRes = R.drawable.ic_state_empty_box,
                             primaryActionText = "Refresh",
-                            onPrimaryAction = { loadData() }
+                            onPrimaryAction = { loadData() },
+                            modifier = Modifier.weight(1f)
                         )
                     } else {
                         LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(),
                             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 120.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {

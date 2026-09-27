@@ -7,12 +7,12 @@ import java.util.UUID
 data class OfficerAccount(
     val id: String = UUID.randomUUID().toString(),
     val fullName: String,
-    val officerId: String,          // e.g. "GN/WP/GM/0142"
-    val division: String,           // e.g. "142 - Mahara Central"
+    val officerId: String,          // "GN/WP/GM/0142"
+    val division: String,           //  "142 - Kurunegala"
     val province: String = "Western Province",
     val email: String,
     val phone: String,
-    val passwordHash: String,       // Stored secure hash
+    val passwordHash: String,       // secure hash
     val createdAt: Long = System.currentTimeMillis(),
     val lastLoginAt: Long = System.currentTimeMillis()
 )

@@ -23,12 +23,9 @@ import com.keshan_ransilu.officer.ui.theme.HeaderBluePrimary
 import com.keshan_ransilu.officer.ui.theme.TextPrimary
 import com.keshan_ransilu.officer.ui.theme.TextSecondary
 
-/**
- * Full-screen Illustrated State View matching the modern aesthetic in reference designs.
- * Used for empty states, no results, error/not found, expired sessions, and nothing-here states.
- */
 @Composable
 fun IllustratedStateScreen(
+    modifier: Modifier = Modifier,
     title: String,
     subtitle: String,
     iconRes: Int = R.drawable.ic_state_empty_box,
@@ -37,16 +34,13 @@ fun IllustratedStateScreen(
     secondaryActionText: String? = null,
     onSecondaryAction: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
-    modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.White)
-            .statusBarsPadding()
-            .navigationBarsPadding()
+            .background(Color.Transparent)
     ) {
         if (onBackClick != null) {
             IconButton(
@@ -66,95 +60,78 @@ fun IllustratedStateScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 28.dp, vertical = 20.dp)
+                .padding(horizontal = 32.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.Center
         ) {
-            // Top Title & Subtitle Area
-            Column(
+            // Illustrated Artwork (shown at top of centered group)
+            Image(
+                painter = painterResource(id = iconRes),
+                contentDescription = title,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = if (onBackClick != null) 36.dp else 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = title,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 30.sp
-                )
+                    .size(180.dp)
+                    .padding(8.dp)
+            )
 
-                Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
-                Text(
-                    text = subtitle,
-                    fontSize = 13.sp,
-                    color = TextSecondary,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 19.sp,
-                    modifier = Modifier.padding(horizontal = 12.dp)
-                )
-            }
+            // Title
+            Text(
+                text = title,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold,
+                color = TextPrimary,
+                textAlign = TextAlign.Center,
+                lineHeight = 28.sp
+            )
 
-            // Center Illustrated Artwork with Soft Organic Backdrop
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 36.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = iconRes),
-                    contentDescription = title,
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Subtitle
+            Text(
+                text = subtitle,
+                fontSize = 13.sp,
+                color = TextSecondary,
+                textAlign = TextAlign.Center,
+                lineHeight = 19.sp,
+                modifier = Modifier.padding(horizontal = 8.dp)
+            )
+
+            // Action Buttons
+            if (!primaryActionText.isNullOrBlank() && onPrimaryAction != null) {
+                Spacer(modifier = Modifier.height(28.dp))
+                Button(
+                    onClick = onPrimaryAction,
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary),
                     modifier = Modifier
-                        .size(190.dp)
-                        .padding(8.dp)
-                )
+                        .fillMaxWidth()
+                        .height(50.dp)
+                ) {
+                    Text(
+                        text = primaryActionText,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
             }
 
-            // Bottom Action Buttons Area
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                if (!primaryActionText.isNullOrBlank() && onPrimaryAction != null) {
-                    Button(
-                        onClick = onPrimaryAction,
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = HeaderBluePrimary),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                    ) {
-                        Text(
-                            text = primaryActionText,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    }
-                }
-
-                if (!secondaryActionText.isNullOrBlank() && onSecondaryAction != null) {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    TextButton(
-                        onClick = onSecondaryAction,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(46.dp)
-                    ) {
-                        Text(
-                            text = secondaryActionText,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = HeaderBluePrimary
-                        )
-                    }
+            if (!secondaryActionText.isNullOrBlank() && onSecondaryAction != null) {
+                Spacer(modifier = Modifier.height(10.dp))
+                TextButton(
+                    onClick = onSecondaryAction,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp)
+                ) {
+                    Text(
+                        text = secondaryActionText,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = HeaderBluePrimary
+                    )
                 }
             }
         }

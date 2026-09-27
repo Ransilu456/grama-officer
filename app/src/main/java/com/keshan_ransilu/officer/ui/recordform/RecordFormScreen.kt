@@ -74,6 +74,12 @@ fun RecordFormScreen(
                     formState[field.key] = todayStr
                 }
             }
+            if (moduleId == "person" || moduleId == "house") {
+                if (formState["gnDivision"].isNullOrBlank()) {
+                    val auth = com.keshan_ransilu.officer.repository.OfficerAuthRepository(context).getOfficerAccount()
+                    formState["gnDivision"] = auth?.division?.ifBlank { "ග්‍රාම නිලධාරී වසම" } ?: "ග්‍රාම නිලධාරී වසම"
+                }
+            }
         }
 
         // Load relational lists
@@ -91,14 +97,14 @@ fun RecordFormScreen(
         }
     }
 
-    val handleSave = {
-        val validationErrors = repository.validate(module, formState)
-        errors.clear()
-        errors.putAll(validationErrors)
+    val handleSave: () -> Unit = {
+        scope.launch {
+            val validationErrors = repository.validate(module, formState.toMap(), recordId)
+            errors.clear()
+            errors.putAll(validationErrors)
 
-        if (errors.isEmpty()) {
-            isSaving = true
-            scope.launch {
+            if (errors.isEmpty()) {
+                isSaving = true
                 repository.save(moduleId, formState.toMap(), recordId)
                 isSaving = false
                 onSaveSuccess()
@@ -148,8 +154,7 @@ fun RecordFormScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Column {
-                            Text(module.titleEn, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
-                            Text(module.titleSi, fontSize = 12.sp, color = TextSecondary)
+                            Text(module.titleSi, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
                         }
                     }
 
@@ -164,6 +169,29 @@ fun RecordFormScreen(
                             onValueChange = { newValue ->
                                 formState[field.key] = newValue
                                 errors.remove(field.key)
+
+                                // Auto pre-fill address and GN division when a Person selects a House
+                                if (moduleId == "person" && field.key == "houseId" && newValue.isNotBlank()) {
+                                    scope.launch {
+                                        val houseRecord = repository.getById("house", newValue)
+                                        if (houseRecord != null) {
+                                            val houseAddr = houseRecord["address"]?.jsonPrimitive?.content.orEmpty()
+                                            val houseGn = houseRecord["gnDivision"]?.jsonPrimitive?.content.orEmpty()
+
+                                            if (houseAddr.isNotBlank()) {
+                                                formState["address"] = houseAddr
+                                                errors.remove("address")
+                                            }
+                                            if (houseGn.isNotBlank()) {
+                                                formState["gnDivision"] = houseGn
+                                                errors.remove("gnDivision")
+                                            } else {
+                                                val auth = com.keshan_ransilu.officer.repository.OfficerAuthRepository(context).getOfficerAccount()
+                                                formState["gnDivision"] = auth?.division?.ifBlank { "ග්‍රාම නිලධාරී වසම" } ?: "ග්‍රාම නිලධාරී වසම"
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         )
                     }
@@ -184,7 +212,7 @@ fun RecordFormScreen(
                         } else {
                             Icon(Icons.Default.CheckCircle, null, modifier = Modifier.size(20.dp))
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(if (recordId.isNullOrBlank()) "Save Entry" else "Update Entry", fontWeight = FontWeight.Bold)
+                            Text(if (recordId.isNullOrBlank()) "සටහන සුරකින්න" else "වෙනස්කම් සුරකින්න", fontWeight = FontWeight.Bold)
                         }
                     }
 
@@ -201,14 +229,14 @@ fun RecordFormScreen(
                         ) {
                             Icon(Icons.Default.Delete, null, modifier = Modifier.size(18.dp), tint = Color(0xFFE53935))
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Delete Record", fontWeight = FontWeight.Bold, color = Color(0xFFE53935))
+                            Text("සටහන මකා දමන්න", fontWeight = FontWeight.Bold, color = Color(0xFFE53935))
                         }
 
                         if (showDeleteDialog) {
                             AlertDialog(
                                 onDismissRequest = { showDeleteDialog = false },
-                                title = { Text("Delete Entry", fontWeight = FontWeight.Bold) },
-                                text = { Text("Are you sure you want to permanently delete this official record?") },
+                                title = { Text("සටහන මකා දැමීම", fontWeight = FontWeight.Bold) },
+                                text = { Text("මෙම නිල සටහන ස්ථිරවම මකා දැමීමට අවශ්‍ය බව සහතිකද?") },
                                 confirmButton = {
                                     TextButton(
                                         onClick = {
@@ -219,12 +247,12 @@ fun RecordFormScreen(
                                             }
                                         }
                                     ) {
-                                        Text("Delete", color = Color.Red, fontWeight = FontWeight.Bold)
+                                        Text("මකා දමන්න", color = Color.Red, fontWeight = FontWeight.Bold)
                                     }
                                 },
                                 dismissButton = {
                                     TextButton(onClick = { showDeleteDialog = false }) {
-                                        Text("Cancel")
+                                        Text("අවලංගු කරන්න")
                                     }
                                 },
                                 shape = RoundedCornerShape(20.dp),
@@ -277,14 +305,14 @@ fun FormScreenHeader(
                 Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.Check, "Save", tint = Color.White, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Save", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 14.sp)
+                    Text("සුරකින්න", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 14.sp)
                 }
             }
         }
 
         Spacer(modifier = Modifier.height(12.dp))
-        Text(if (isEdit) "Edit Record" else "Add New Record", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
-        Text("${module.titleEn} (${module.titleSi})", fontSize = 13.sp, color = Color.White.copy(alpha = 0.75f))
+        Text(if (isEdit) "සටහන සංස්කරණය" else "නව සටහනක් ඇතුළත් කිරීම", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color.White)
+        Text(module.titleSi, fontSize = 13.sp, color = Color.White.copy(alpha = 0.85f))
     }
 }
 
@@ -305,8 +333,19 @@ fun ModernFormField(
         field.key.contains("phone", true) -> Icons.Default.Phone
         field.key.contains("date", true) || field.key.contains("dob", true) -> Icons.Default.CalendarToday
         field.key.contains("address", true) || field.key.contains("location", true) -> Icons.Default.LocationOn
-        field.key.contains("rate", true) || field.key.contains("amount", true) -> Icons.Default.AttachMoney
+        field.key.contains("rate", true) || field.key.contains("amount", true) || field.key.contains("received", true) || field.key.contains("paid", true) || field.key.contains("budget", true) -> Icons.Default.AttachMoney
         else -> Icons.Default.EditNote
+    }
+
+    val labelText = field.label.substringBefore('/').trim()
+
+    val labelComposable: @Composable () -> Unit = {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(labelText, fontSize = 13.sp)
+            if (field.required) {
+                Text(" *", color = Color(0xFFE53935), fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            }
+        }
     }
 
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -322,7 +361,7 @@ fun ModernFormField(
                         value = displayValue,
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text(field.label, fontSize = 13.sp) },
+                        label = labelComposable,
                         leadingIcon = { Icon(fieldIcon, null, tint = HeaderBluePrimary, modifier = Modifier.size(22.dp)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                         modifier = Modifier.fillMaxWidth().menuAnchor(),
@@ -350,7 +389,7 @@ fun ModernFormField(
                 OutlinedTextField(
                     value = value,
                     onValueChange = onValueChange,
-                    label = { Text(field.label, fontSize = 13.sp) },
+                    label = labelComposable,
                     leadingIcon = { Icon(fieldIcon, null, tint = HeaderBluePrimary, modifier = Modifier.size(22.dp)) },
                     modifier = Modifier.fillMaxWidth().height(115.dp),
                     shape = RoundedCornerShape(18.dp),
@@ -368,7 +407,7 @@ fun ModernFormField(
                 OutlinedTextField(
                     value = value,
                     onValueChange = onValueChange,
-                    label = { Text(field.label, fontSize = 13.sp) },
+                    label = labelComposable,
                     leadingIcon = { Icon(fieldIcon, null, tint = HeaderBluePrimary, modifier = Modifier.size(22.dp)) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(18.dp),
@@ -380,7 +419,7 @@ fun ModernFormField(
         }
 
         if (isError) {
-            Text(error!!, color = Color.Red, fontSize = 11.sp, modifier = Modifier.padding(start = 12.dp, top = 4.dp))
+            Text(error, color = Color.Red, fontSize = 11.sp, modifier = Modifier.padding(start = 12.dp, top = 4.dp))
         }
     }
 }
